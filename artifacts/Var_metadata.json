@@ -1,0 +1,59 @@
+{
+	"compiler": {
+		"version": "0.8.34+commit.80d5c536"
+	},
+	"language": "Solidity",
+	"output": {
+		"abi": [
+			{
+				"inputs": [],
+				"name": "MY_ADDR",
+				"outputs": [
+					{
+						"internalType": "address",
+						"name": "",
+						"type": "address"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			}
+		],
+		"devdoc": {
+			"kind": "dev",
+			"methods": {},
+			"version": 1
+		},
+		"userdoc": {
+			"kind": "user",
+			"methods": {},
+			"version": 1
+		}
+	},
+	"settings": {
+		"compilationTarget": {
+			"solidity基础/基础.sol": "Var"
+		},
+		"evmVersion": "osaka",
+		"libraries": {},
+		"metadata": {
+			"bytecodeHash": "ipfs"
+		},
+		"optimizer": {
+			"enabled": false,
+			"runs": 200
+		},
+		"remappings": []
+	},
+	"sources": {
+		"solidity基础/基础.sol": {
+			"keccak256": "0xfb6bac040c8f31efc1928f0b8f84f3a64d573686155f1c6a90d3a4f4a6b61402",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://87a5090a51f12fc463bc7db1bf64e248de8b895e30bc6f590d8b76a5bd4f4ce7",
+				"dweb:/ipfs/QmWNvf2vWgJcx77xRBiFeqnsBJxQRX2tELDPXeMcF1D6Zm"
+			]
+		}
+	},
+	"version": 1
+}

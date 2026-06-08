@@ -1,0 +1,60 @@
+{
+	"compiler": {
+		"version": "0.8.34+commit.80d5c536"
+	},
+	"language": "Solidity",
+	"output": {
+		"abi": [
+			{
+				"inputs": [],
+				"name": "doubleNuamber",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "resetNumber",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			}
+		],
+		"devdoc": {
+			"kind": "dev",
+			"methods": {},
+			"version": 1
+		},
+		"userdoc": {
+			"kind": "user",
+			"methods": {},
+			"version": 1
+		}
+	},
+	"settings": {
+		"compilationTarget": {
+			"solidity基础/函数修饰符.sol": "FunctionModifier"
+		},
+		"evmVersion": "osaka",
+		"libraries": {},
+		"metadata": {
+			"bytecodeHash": "ipfs"
+		},
+		"optimizer": {
+			"enabled": false,
+			"runs": 200
+		},
+		"remappings": []
+	},
+	"sources": {
+		"solidity基础/函数修饰符.sol": {
+			"keccak256": "0x9c96a72d92488629ffa57f8b50ca48f99995089656cc260baf6721a45d43bb07",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://76e456ecf4c030aa1112ab6d77322ec4ae1c44ea9dcce769b4a418ef5490bf8a",
+				"dweb:/ipfs/QmSWp62932iRZPQBzXpf1896omoG9WPvdfWCk3tSGbMe28"
+			]
+		}
+	},
+	"version": 1
+}

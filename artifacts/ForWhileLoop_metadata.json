@@ -1,0 +1,72 @@
+{
+	"compiler": {
+		"version": "0.8.34+commit.80d5c536"
+	},
+	"language": "Solidity",
+	"output": {
+		"abi": [
+			{
+				"inputs": [],
+				"name": "loop",
+				"outputs": [],
+				"stateMutability": "pure",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "uint256",
+						"name": "number",
+						"type": "uint256"
+					}
+				],
+				"name": "sum",
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"stateMutability": "pure",
+				"type": "function"
+			}
+		],
+		"devdoc": {
+			"kind": "dev",
+			"methods": {},
+			"version": 1
+		},
+		"userdoc": {
+			"kind": "user",
+			"methods": {},
+			"version": 1
+		}
+	},
+	"settings": {
+		"compilationTarget": {
+			"solidity基础/循环.sol": "ForWhileLoop"
+		},
+		"evmVersion": "osaka",
+		"libraries": {},
+		"metadata": {
+			"bytecodeHash": "ipfs"
+		},
+		"optimizer": {
+			"enabled": false,
+			"runs": 200
+		},
+		"remappings": []
+	},
+	"sources": {
+		"solidity基础/循环.sol": {
+			"keccak256": "0x4d35ecaf7c22309678a082b92ef843fb73f7fceb5987db9365f88d6120f98741",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://5a3938718a4f9d03f84fa4f3a0396fb6c0e10da7e213154fb7834e4061526b4a",
+				"dweb:/ipfs/Qmd6bYdBQPRubKowYVYRvMn4wG7ezXopkNg2LBJ6h4Bk8B"
+			]
+		}
+	},
+	"version": 1
+}
