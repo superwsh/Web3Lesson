@@ -58,14 +58,6 @@
       }
     }
   },
-  "solidity基础/关键字.sol": {
-    "__sources__": {
-      "solidity基础/关键字.sol": {
-        "content": "// SPDX-License-Identifier: MIT\r\npragma solidity ^0.8.20;\r\n\r\ncontract HelloWorld {\r\n    uint256 a = 101;\r\n    bytes32 str = \"Hello\";\r\n    string strVar = \"Hello World\";\r\n    // internal：当前合约和子合约可调用  external：外部合约和外部账户调用\r\n    // view：只读取变量  pure：纯运算\r\n    // returs() 声明返回值类型\r\n    // private  public\r\n    /*\r\n    storage  永久变量\r\n    memory   临时变量可修改 \r\n    calldata 临时常量不可修改\r\n    */\r\n    function sayHello() public view returns(string memory){\r\n        return strVar;\r\n    }   \r\n\r\n    function setHello(string memory newStr) public {\r\n        strVar = newStr;\r\n    }\r\n\r\n\r\n   function addInfo(string memory helloStr) internal pure returns(string memory) {\r\n    return string.concat(helloStr,\"from Wu's contract\");\r\n   }\r\n}",
-        "file": "solidity基础/关键字.sol"
-      }
-    }
-  },
   "solidity基础/权限和所有权.sol": {
     "__sources__": {
       "solidity基础/权限和所有权.sol": {
@@ -98,11 +90,27 @@
       }
     }
   },
+  "solidity基础/关键字.sol": {
+    "__sources__": {
+      "solidity基础/关键字.sol": {
+        "content": "// SPDX-License-Identifier: MIT\r\npragma solidity ^0.8.20;\r\n\r\ncontract HelloWorld {\r\n    uint256 a = 101;\r\n    bytes32 str = \"Hello\";\r\n    string strVar = \"Hello World\";\r\n    // internal：当前合约和子合约可调用  external：外部合约和外部账户调用\r\n    // view：只读取变量  pure：纯运算\r\n    // returs() 声明返回值类型\r\n    // private  public\r\n    /*\r\n    storage  永久变量\r\n    memory   临时变量可修改 \r\n    calldata 临时常量不可修改\r\n    */\r\n    function sayHello() public view returns(string memory){\r\n        return strVar;\r\n    }   \r\n\r\n    function setHello(string memory newStr) public {\r\n        strVar = newStr;\r\n    }\r\n\r\n\r\n   function addInfo(string memory helloStr) internal pure returns(string memory) {\r\n    return string.concat(helloStr,\"from Wu's contract\");\r\n   }\r\n}",
+        "file": "solidity基础/关键字.sol"
+      }
+    }
+  },
   "solidity基础/所有者调用.sol": {
     "__sources__": {
       "solidity基础/所有者调用.sol": {
         "content": "// SPDX-License-Identifier: MIT\r\npragma solidity ^0.8.7;\r\n\r\ncontract MyOwnable {\r\n    address public owner;\r\n\r\n    constructor() {\r\n        owner = msg.sender;\r\n    }\r\n\r\n    modifier onlyOwner(){\r\n        require(msg.sender == owner, \"Only owner can call this function\");\r\n        _;\r\n    }\r\n\r\n    function transferOwnership(address newOwner) external onlyOwner {\r\n        require(newOwner != address(0), \"invalid address\");\r\n        owner = newOwner;\r\n    }\r\n\r\n    function onlyOwnerCallThisFunc() external onlyOwner {\r\n        //code\r\n    }\r\n\r\n    function anyoneCallThisFunc() external {\r\n        //code\r\n    }\r\n}",
         "file": "solidity基础/所有者调用.sol"
+      }
+    }
+  },
+  "solidity基础/Mapping映射.sol": {
+    "__sources__": {
+      "solidity基础/Mapping映射.sol": {
+        "content": "// SPDX-License-Identifier: MIT\r\npragma solidity ^0.8.7;\r\n\r\ncontract MappingCon {\r\n    // ◦ 创建一个公开的映射 balances ，键类型为 address ，值类型为 uint 。\r\n    // ◦ 实现一个函数 deposit() ，允许用户为自己的账户存款。\r\n    // ◦ 实现一个函数 withdraw(uint amount) ，允许用户从自己的账户中提取金额。\r\n    // ◦ 实现一个函数 checkBalance() ，返回调用者的当前余额\r\n\r\n    mapping(address => uint) public balances; \r\n\r\n    function deposit(uint amount) public payable {\r\n        balances[msg.sender] += amount;\r\n    }\r\n\r\n    function withdraw(uint amount) public payable  {\r\n        require(balances[msg.sender] >= amount, \"Insufficient funds\");\r\n        balances[msg.sender] -= amount;\r\n    }\r\n\r\n    function checkBalance() public view returns(uint){\r\n        return balances[msg.sender];\r\n    }\r\n}",
+        "file": "solidity基础/Mapping映射.sol"
       }
     }
   }
