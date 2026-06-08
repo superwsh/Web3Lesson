@@ -1,0 +1,72 @@
+{
+	"compiler": {
+		"version": "0.8.34+commit.80d5c536"
+	},
+	"language": "Solidity",
+	"output": {
+		"abi": [
+			{
+				"inputs": [],
+				"name": "sayHello",
+				"outputs": [
+					{
+						"internalType": "string",
+						"name": "",
+						"type": "string"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "string",
+						"name": "newStr",
+						"type": "string"
+					}
+				],
+				"name": "setHello",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			}
+		],
+		"devdoc": {
+			"kind": "dev",
+			"methods": {},
+			"version": 1
+		},
+		"userdoc": {
+			"kind": "user",
+			"methods": {},
+			"version": 1
+		}
+	},
+	"settings": {
+		"compilationTarget": {
+			"合约设计和功能/基础1.sol": "HelloWorld"
+		},
+		"evmVersion": "osaka",
+		"libraries": {},
+		"metadata": {
+			"bytecodeHash": "ipfs"
+		},
+		"optimizer": {
+			"enabled": false,
+			"runs": 200
+		},
+		"remappings": []
+	},
+	"sources": {
+		"合约设计和功能/基础1.sol": {
+			"keccak256": "0x3d0b79b4048000f9869fb4fe6015e0318191b1b6c1cf14fac058e2c4c776771f",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://d29d4eca069b27bb086a93c1f7378cff7eba4ee7173d37fb5a4cad020f9ae77d",
+				"dweb:/ipfs/QmaJUQjoyJMduMZSCQzsQM66kZf18h74CyN37972VHQg2d"
+			]
+		}
+	},
+	"version": 1
+}
