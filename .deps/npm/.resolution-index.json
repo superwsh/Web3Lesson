@@ -157,11 +157,78 @@
       }
     }
   },
+  "solidity基础/所有者调用.sol": {
+    "__sources__": {
+      "solidity基础/所有者调用.sol": {
+        "content": "// SPDX-License-Identifier: MIT\r\npragma solidity ^0.8.7;\r\n\r\ncontract MyOwnable {\r\n    address public owner;\r\n\r\n    constructor() {\r\n        owner = msg.sender;\r\n    }\r\n\r\n    modifier onlyOwner(){\r\n        require(msg.sender == owner, \"Only owner can call this function\");\r\n        _;\r\n    }\r\n\r\n    function transferOwnership(address newOwner) external onlyOwner {\r\n        require(newOwner != address(0), \"invalid address\");\r\n        owner = newOwner;\r\n    }\r\n\r\n    function onlyOwnerCallThisFunc() external onlyOwner {\r\n        //code\r\n    }\r\n\r\n    function anyoneCallThisFunc() external {\r\n        //code\r\n    }\r\n}",
+        "file": "solidity基础/所有者调用.sol"
+      }
+    }
+  },
+  "solidity基础/Mapping映射.sol": {
+    "__sources__": {
+      "solidity基础/Mapping映射.sol": {
+        "content": "// SPDX-License-Identifier: MIT\r\npragma solidity ^0.8.7;\r\n\r\ncontract MappingContract {\r\n    // ◦ 创建一个公开的映射 balances ，键类型为 address ，值类型为 uint 。\r\n    // ◦ 实现一个函数 deposit() ，允许用户为自己的账户存款。\r\n    // ◦ 实现一个函数 withdraw(uint amount) ，允许用户从自己的账户中提取金额。\r\n    // ◦ 实现一个函数 checkBalance() ，返回调用者的当前余额\r\n\r\n    mapping(address => uint) public balances; \r\n\r\n    function deposit(uint amount) public payable {\r\n        balances[msg.sender] += amount;\r\n    }\r\n\r\n    function withdraw(uint amount) public payable  {\r\n        require(balances[msg.sender] >= amount, \"Insufficient funds\");\r\n        balances[msg.sender] -= amount;\r\n    }\r\n\r\n    function checkBalance() public view returns(uint){\r\n        return balances[msg.sender];\r\n    }\r\n\r\n\r\n    // • 要求：\r\n    //     a. 使用Solidity 0.8编写合约。\r\n    //     b. 实现一个 set 函数，用于向 balances 添加或更新条目，并处理 keys 和 inserted 。\r\n    //     c. 实现 getSize 函数返回当前 keys 数组的长度。\r\n    //     d. 实现函数，根据传入的索引返回相应地址的余额。\r\n    // • 测试：\r\n    //     a. 向合约中添加几个不同的地址和余额。\r\n    //     b. 调用获取大小的函数确保大小正确。\r\n    //     c. 分别尝试获取第一个和最后一个元素的余额，确保返回正确。\r\n    address[] public keys;\r\n    mapping(address => bool) public inserted;\r\n\r\n    function set(address addr, uint amount) public {\r\n        balances[addr] = amount;\r\n        if(!inserted[addr]) {\r\n            keys.push(addr);\r\n            inserted[addr] = true;\r\n        }\r\n    }\r\n\r\n    function getSize() public view returns(uint){\r\n        return keys.length;\r\n    }\r\n\r\n    function getAmount(address addr) public view returns(uint){\r\n        return balances[addr];\r\n    }\r\n\r\n    function first() external  view returns(uint){\r\n        return balances[keys[0]];\r\n    }\r\n\r\n     function last() external  view returns(uint){\r\n        return balances[keys[keys.length - 1]];\r\n    }\r\n}",
+        "file": "solidity基础/Mapping映射.sol"
+      }
+    }
+  },
+  "solidity基础/存储、内存和调用数据storage、memory、calldata.sol": {
+    "__sources__": {}
+  },
   "solidity基础/错误error.sol": {
     "__sources__": {
       "solidity基础/错误error.sol": {
         "content": "// SPDX-License-Identifier: MIT\r\npragma solidity ^0.8.7;\r\n\r\ncontract ErrorHandle{\r\n    function testRequire(uint number) public pure {\r\n        require(number < 10,\"It's > 10\");\r\n    }\r\n\r\n    function testRevert(uint _n) public pure {\r\n        if(_n > 10){\r\n            revert(\"It's > 10\");\r\n        }\r\n    }\r\n\r\n    //自定义error可以节省gas\r\n    //自定义的error要配合revert关键字使用\r\n    error MyError(address caller,uint i);\r\n\r\n    function testMyError(uint i) public view{\r\n        if(i > 10){\r\n            revert MyError(msg.sender, i);\r\n        }\r\n    }\r\n}",
         "file": "solidity基础/错误error.sol"
+      }
+    }
+  },
+  "solidity基础/映射mapping.sol": {
+    "__sources__": {
+      "solidity基础/映射mapping.sol": {
+        "content": "// SPDX-License-Identifier: MIT\r\npragma solidity ^0.8.7;\r\n\r\ncontract MappingContract {\r\n    // ◦ 创建一个公开的映射 balances ，键类型为 address ，值类型为 uint 。\r\n    // ◦ 实现一个函数 deposit() ，允许用户为自己的账户存款。\r\n    // ◦ 实现一个函数 withdraw(uint amount) ，允许用户从自己的账户中提取金额。\r\n    // ◦ 实现一个函数 checkBalance() ，返回调用者的当前余额\r\n\r\n    mapping(address => uint) public balances; \r\n\r\n    function deposit(uint amount) public payable {\r\n        balances[msg.sender] += amount;\r\n    }\r\n\r\n    function withdraw(uint amount) public payable  {\r\n        require(balances[msg.sender] >= amount, \"Insufficient funds\");\r\n        balances[msg.sender] -= amount;\r\n    }\r\n\r\n    function checkBalance() public view returns(uint){\r\n        return balances[msg.sender];\r\n    }\r\n\r\n\r\n    // • 要求：\r\n    //     a. 使用Solidity 0.8编写合约。\r\n    //     b. 实现一个 set 函数，用于向 balances 添加或更新条目，并处理 keys 和 inserted 。\r\n    //     c. 实现 getSize 函数返回当前 keys 数组的长度。\r\n    //     d. 实现函数，根据传入的索引返回相应地址的余额。\r\n    // • 测试：\r\n    //     a. 向合约中添加几个不同的地址和余额。\r\n    //     b. 调用获取大小的函数确保大小正确。\r\n    //     c. 分别尝试获取第一个和最后一个元素的余额，确保返回正确。\r\n    address[] public keys;\r\n    mapping(address => bool) public inserted;\r\n\r\n    function set(address addr, uint amount) public {\r\n        balances[addr] = amount;\r\n        if(!inserted[addr]) {\r\n            keys.push(addr);\r\n            inserted[addr] = true;\r\n        }\r\n    }\r\n\r\n    function getSize() public view returns(uint){\r\n        return keys.length;\r\n    }\r\n\r\n    function getAmount(address addr) public view returns(uint){\r\n        return balances[addr];\r\n    }\r\n\r\n    function first() external  view returns(uint){\r\n        return balances[keys[0]];\r\n    }\r\n\r\n     function last() external  view returns(uint){\r\n        return balances[keys[keys.length - 1]];\r\n    }\r\n}",
+        "file": "solidity基础/映射mapping.sol"
+      }
+    }
+  },
+  "solidity基础/循环.sol": {
+    "__sources__": {
+      "solidity基础/循环.sol": {
+        "content": "// SPDX-License-Identifier: MIT\r\npragma solidity ^0.8.7;\r\n\r\ncontract IfElse{\r\n    function example (uint _x) public pure returns (uint) {\r\n        if(_x < 10){\r\n            return 1;\r\n        }else if(_x < 20){\r\n            return 2;\r\n        }else{\r\n            return 3;\r\n        }\r\n    }\r\n\r\n    function tenary (uint _x) public pure returns (uint) {\r\n        return _x < 10 ? 1 : 2;\r\n    }\r\n}\r\n\r\ncontract ForWhileLoop{\r\n    function loop() external pure {\r\n        for(uint i = 0;i < 10;i++){\r\n            if(i == 3){\r\n                continue ;\r\n            }\r\n            if(i == 5){\r\n                break ;\r\n            }\r\n        }\r\n        uint j = 10;\r\n        while (j < 10){\r\n            j++;\r\n        }\r\n    }\r\n\r\n    function sum(uint number) external pure returns(uint){\r\n        uint total;\r\n        for(uint i = 0;i <= number;i++){\r\n            total += i;\r\n        }\r\n        return total;\r\n    }\r\n}",
+        "file": "solidity基础/循环.sol"
+      }
+    }
+  },
+  "solidity基础/所有者调用onlyOwner.sol": {
+    "__sources__": {
+      "solidity基础/所有者调用onlyOwner.sol": {
+        "content": "// SPDX-License-Identifier: MIT\r\npragma solidity ^0.8.7;\r\n\r\ncontract MyOwnable {\r\n    address public owner;\r\n\r\n    constructor() {\r\n        owner = msg.sender;\r\n    }\r\n\r\n    modifier onlyOwner(){\r\n        require(msg.sender == owner, \"Only owner can call this function\");\r\n        _;\r\n    }\r\n\r\n    function transferOwnership(address newOwner) external onlyOwner {\r\n        require(newOwner != address(0), \"invalid address\");\r\n        owner = newOwner;\r\n    }\r\n\r\n    function onlyOwnerCallThisFunc() external onlyOwner {\r\n        //code\r\n    }\r\n\r\n    function anyoneCallThisFunc() external {\r\n        //code\r\n    }\r\n}",
+        "file": "solidity基础/所有者调用onlyOwner.sol"
+      }
+    }
+  },
+  "solidity基础/函数修饰符modifier.sol": {
+    "__sources__": {
+      "solidity基础/函数修饰符modifier.sol": {
+        "content": "// SPDX-License-Identifier: MIT\r\npragma solidity ^0.8.7;\r\n\r\ncontract FunctionModifier {\r\n    uint private number;\r\n    modifier nonZero {\r\n        require(number != 0, \"Number is zero\");\r\n        _;\r\n    }\r\n\r\n    function doubleNuamber() public nonZero{\r\n        number *= 2;\r\n    }\r\n\r\n    function resetNumber() public{\r\n        number = 0;\r\n    }\r\n}",
+        "file": "solidity基础/函数修饰符modifier.sol"
+      }
+    }
+  },
+  "solidity基础/函数输出和调用.sol": {
+    "__sources__": {
+      "solidity基础/函数输出和调用.sol": {
+        "content": "// SPDX-License-Identifier: MIT\r\npragma solidity ^0.8.0;\r\n\r\ncontract MultipleOutputs {\r\n    uint public number;\r\n    bool public flag;\r\n    string public text;\r\n\r\n    function returnMultiple() public pure returns (uint, bool, string memory) {\r\n     return (256, true, \"Hello, Solidity!\");\r\n    }\r\n    function captureOutputs() public {\r\n        (number, flag, text) = returnMultiple();\r\n    }\r\n    function displayOutputs() public view returns (uint, bool, string memory) {\r\n        return (number, flag, text);\r\n    }\r\n}\r\n",
+        "file": "solidity基础/函数输出和调用.sol"
+      }
+    }
+  },
+  "solidity基础/存储类型storage、memory、calldata.sol": {
+    "__sources__": {
+      "solidity基础/存储类型storage、memory、calldata.sol": {
+        "content": "// SPDX-License-Identifier: MIT\r\npragma solidity ^0.8.7;\r\n\r\ncontract DataLocation {\r\n    // ◦ storage：状态变量，可修改\r\n    // ◦ memory：临时存储，不保存在区块链上，可读写\r\n    // ◦ calldata：函数输入，不可修改，可用于节省 gas\r\n\r\n\r\n    // • 定义一个struct，包含一个字符串和一个整数数组。\r\n    // • 实现两个函数：\r\n    // a. 一个函数用于修改struct的字符串成员，该函数的参数为字符串，使用storage存储数据位置。\r\n    // b. 另一个函数用于读取struct的整数数组成员，该函数的参数为整数数组，使用calldata存储数据\r\n    // 位置，且在函数内部调用时，参数也使用calldata存储位置。\r\n    struct MyStruct {\r\n        string text;\r\n        uint arr;\r\n    }\r\n\r\n    mapping(address => MyStruct) map;\r\n\r\n    function modify(string memory) external {\r\n        map[msg.sender] = MyStruct({text: \"123\", arr:123});\r\n\r\n        MyStruct storage myStruct = map[msg.sender];\r\n        myStruct.text = \"hello\";\r\n    }   \r\n\r\n    function example(uint[] calldata arr) external returns(uint[] memory) {\r\n        _internal(arr);\r\n        uint[] memory newArr = new uint[](3);\r\n        newArr[1] = 888;\r\n        return newArr;\r\n    }\r\n\r\n    function _internal(uint[] calldata arr) private returns(uint) {\r\n        // uint x = arr[0];\r\n    }\r\n}",
+        "file": "solidity基础/存储类型storage、memory、calldata.sol"
       }
     }
   },
@@ -176,56 +243,16 @@
   "solidity基础/枚举enum.sol": {
     "__sources__": {
       "solidity基础/枚举enum.sol": {
-        "content": "// SPDX-License-Identifier: MIT\r\npragma solidity ^0.8.7;",
+        "content": "// SPDX-License-Identifier: MIT\r\npragma solidity ^0.8.7;\r\n\r\ncontract Enum {\r\n//     • 任务：编写一个Solidity智能合约，实现一个简单的订单处理系统。\r\n//         ◦ 声明一个名为 OrderStatus 的枚举，包括状态： None , Pending , Shipped ,\r\n//         Completed , Rejected , Cancelled 。\r\n//         ◦ 创建一个结构体 Order ，包含买家地址和订单状态。\r\n//         ◦ 实现功能：\r\n//         i. 添加新订单到数组。\r\n//         ii. 更新订单状态。\r\n//         iii. 获取特定订单的状态。\r\n//         iv. 重置订单状态到默认值。\r\n    enum OrderStatus {\r\n        None,\r\n        Pending,\r\n        Shipped,\r\n        Completed,\r\n        Rejected,\r\n        Cancelled\r\n    }\r\n\r\n    OrderStatus public status; //默认为None\r\n\r\n    struct Order {\r\n        address buyer;\r\n        OrderStatus status;\r\n    }\r\n\r\n    Order[] public  orders;\r\n\r\n    function add(Order memory order) external {\r\n        orders.push(order);\r\n    }\r\n\r\n    function setStatus(OrderStatus newStatus) external {\r\n        status = newStatus;\r\n    }\r\n\r\n    function getStatus() external view returns(OrderStatus){\r\n       return status;\r\n    }\r\n\r\n    function reset() external {\r\n        delete status;\r\n    }\r\n}",
         "file": "solidity基础/枚举enum.sol"
       }
     }
   },
-  "solidity基础/所有者调用.sol": {
+  "solidity基础/数据存储位置storage、memory、calldata.sol": {
     "__sources__": {
-      "solidity基础/所有者调用.sol": {
-        "content": "// SPDX-License-Identifier: MIT\r\npragma solidity ^0.8.7;\r\n\r\ncontract MyOwnable {\r\n    address public owner;\r\n\r\n    constructor() {\r\n        owner = msg.sender;\r\n    }\r\n\r\n    modifier onlyOwner(){\r\n        require(msg.sender == owner, \"Only owner can call this function\");\r\n        _;\r\n    }\r\n\r\n    function transferOwnership(address newOwner) external onlyOwner {\r\n        require(newOwner != address(0), \"invalid address\");\r\n        owner = newOwner;\r\n    }\r\n\r\n    function onlyOwnerCallThisFunc() external onlyOwner {\r\n        //code\r\n    }\r\n\r\n    function anyoneCallThisFunc() external {\r\n        //code\r\n    }\r\n}",
-        "file": "solidity基础/所有者调用.sol"
-      }
-    }
-  },
-  "solidity基础/函数修饰符modifier.sol": {
-    "__sources__": {
-      "solidity基础/函数修饰符modifier.sol": {
-        "content": "// SPDX-License-Identifier: MIT\r\npragma solidity ^0.8.7;\r\n\r\ncontract FunctionModifier {\r\n    uint private number;\r\n    modifier nonZero {\r\n        require(number != 0, \"Number is zero\");\r\n        _;\r\n    }\r\n\r\n    function doubleNuamber() public nonZero{\r\n        number *= 2;\r\n    }\r\n\r\n    function resetNumber() public{\r\n        number = 0;\r\n    }\r\n}",
-        "file": "solidity基础/函数修饰符modifier.sol"
-      }
-    }
-  },
-  "solidity基础/所有者调用onlyOwner.sol": {
-    "__sources__": {
-      "solidity基础/所有者调用onlyOwner.sol": {
-        "content": "// SPDX-License-Identifier: MIT\r\npragma solidity ^0.8.7;\r\n\r\ncontract MyOwnable {\r\n    address public owner;\r\n\r\n    constructor() {\r\n        owner = msg.sender;\r\n    }\r\n\r\n    modifier onlyOwner(){\r\n        require(msg.sender == owner, \"Only owner can call this function\");\r\n        _;\r\n    }\r\n\r\n    function transferOwnership(address newOwner) external onlyOwner {\r\n        require(newOwner != address(0), \"invalid address\");\r\n        owner = newOwner;\r\n    }\r\n\r\n    function onlyOwnerCallThisFunc() external onlyOwner {\r\n        //code\r\n    }\r\n\r\n    function anyoneCallThisFunc() external {\r\n        //code\r\n    }\r\n}",
-        "file": "solidity基础/所有者调用onlyOwner.sol"
-      }
-    }
-  },
-  "solidity基础/Mapping映射.sol": {
-    "__sources__": {
-      "solidity基础/Mapping映射.sol": {
-        "content": "// SPDX-License-Identifier: MIT\r\npragma solidity ^0.8.7;\r\n\r\ncontract MappingContract {\r\n    // ◦ 创建一个公开的映射 balances ，键类型为 address ，值类型为 uint 。\r\n    // ◦ 实现一个函数 deposit() ，允许用户为自己的账户存款。\r\n    // ◦ 实现一个函数 withdraw(uint amount) ，允许用户从自己的账户中提取金额。\r\n    // ◦ 实现一个函数 checkBalance() ，返回调用者的当前余额\r\n\r\n    mapping(address => uint) public balances; \r\n\r\n    function deposit(uint amount) public payable {\r\n        balances[msg.sender] += amount;\r\n    }\r\n\r\n    function withdraw(uint amount) public payable  {\r\n        require(balances[msg.sender] >= amount, \"Insufficient funds\");\r\n        balances[msg.sender] -= amount;\r\n    }\r\n\r\n    function checkBalance() public view returns(uint){\r\n        return balances[msg.sender];\r\n    }\r\n\r\n\r\n    // • 要求：\r\n    //     a. 使用Solidity 0.8编写合约。\r\n    //     b. 实现一个 set 函数，用于向 balances 添加或更新条目，并处理 keys 和 inserted 。\r\n    //     c. 实现 getSize 函数返回当前 keys 数组的长度。\r\n    //     d. 实现函数，根据传入的索引返回相应地址的余额。\r\n    // • 测试：\r\n    //     a. 向合约中添加几个不同的地址和余额。\r\n    //     b. 调用获取大小的函数确保大小正确。\r\n    //     c. 分别尝试获取第一个和最后一个元素的余额，确保返回正确。\r\n    address[] public keys;\r\n    mapping(address => bool) public inserted;\r\n\r\n    function set(address addr, uint amount) public {\r\n        balances[addr] = amount;\r\n        if(!inserted[addr]) {\r\n            keys.push(addr);\r\n            inserted[addr] = true;\r\n        }\r\n    }\r\n\r\n    function getSize() public view returns(uint){\r\n        return keys.length;\r\n    }\r\n\r\n    function getAmount(address addr) public view returns(uint){\r\n        return balances[addr];\r\n    }\r\n\r\n    function first() external  view returns(uint){\r\n        return balances[keys[0]];\r\n    }\r\n\r\n     function last() external  view returns(uint){\r\n        return balances[keys[keys.length - 1]];\r\n    }\r\n}",
-        "file": "solidity基础/Mapping映射.sol"
-      }
-    }
-  },
-  "solidity基础/循环.sol": {
-    "__sources__": {
-      "solidity基础/循环.sol": {
-        "content": "// SPDX-License-Identifier: MIT\r\npragma solidity ^0.8.7;\r\n\r\ncontract IfElse{\r\n    function example (uint _x) public pure returns (uint) {\r\n        if(_x < 10){\r\n            return 1;\r\n        }else if(_x < 20){\r\n            return 2;\r\n        }else{\r\n            return 3;\r\n        }\r\n    }\r\n\r\n    function tenary (uint _x) public pure returns (uint) {\r\n        return _x < 10 ? 1 : 2;\r\n    }\r\n}\r\n\r\ncontract ForWhileLoop{\r\n    function loop() external pure {\r\n        for(uint i = 0;i < 10;i++){\r\n            if(i == 3){\r\n                continue ;\r\n            }\r\n            if(i == 5){\r\n                break ;\r\n            }\r\n        }\r\n        uint j = 10;\r\n        while (j < 10){\r\n            j++;\r\n        }\r\n    }\r\n\r\n    function sum(uint number) external pure returns(uint){\r\n        uint total;\r\n        for(uint i = 0;i <= number;i++){\r\n            total += i;\r\n        }\r\n        return total;\r\n    }\r\n}",
-        "file": "solidity基础/循环.sol"
-      }
-    }
-  },
-  "solidity基础/函数输出和调用.sol": {
-    "__sources__": {
-      "solidity基础/函数输出和调用.sol": {
-        "content": "// SPDX-License-Identifier: MIT\r\npragma solidity ^0.8.0;\r\n\r\ncontract MultipleOutputs {\r\n    uint public number;\r\n    bool public flag;\r\n    string public text;\r\n\r\n    function returnMultiple() public pure returns (uint, bool, string memory) {\r\n     return (256, true, \"Hello, Solidity!\");\r\n    }\r\n    function captureOutputs() public {\r\n        (number, flag, text) = returnMultiple();\r\n    }\r\n    function displayOutputs() public view returns (uint, bool, string memory) {\r\n        return (number, flag, text);\r\n    }\r\n}\r\n",
-        "file": "solidity基础/函数输出和调用.sol"
+      "solidity基础/数据存储位置storage、memory、calldata.sol": {
+        "content": "// SPDX-License-Identifier: MIT\r\npragma solidity ^0.8.7;\r\n\r\ncontract DataLocation {\r\n    // ◦ storage：状态变量，可修改\r\n    // ◦ memory：临时存储，不保存在区块链上，可读写\r\n    // ◦ calldata：函数输入，不可修改，可用于节省 gas\r\n\r\n\r\n    // • 定义一个struct，包含一个字符串和一个整数数组。\r\n    // • 实现两个函数：\r\n    // a. 一个函数用于修改struct的字符串成员，该函数的参数为字符串，使用storage存储数据位置。\r\n    // b. 另一个函数用于读取struct的整数数组成员，该函数的参数为整数数组，使用calldata存储数据\r\n    // 位置，且在函数内部调用时，参数也使用calldata存储位置。\r\n    struct MyStruct {\r\n        string text;\r\n        uint arr;\r\n    }\r\n\r\n    mapping(address => MyStruct) map;\r\n\r\n    function modify(string memory) external {\r\n        map[msg.sender] = MyStruct({text: \"123\", arr:123});\r\n\r\n        MyStruct storage myStruct = map[msg.sender];\r\n        myStruct.text = \"hello\";\r\n    }   \r\n\r\n    function example(uint[] calldata arr) external returns(uint[] memory) {\r\n        _internal(arr);\r\n        uint[] memory newArr = new uint[](3);\r\n        newArr[1] = 888;\r\n        return newArr;\r\n    }\r\n\r\n    function _internal(uint[] calldata arr) private returns(uint) {\r\n        // uint x = arr[0];\r\n    }\r\n}\r\n\r\n\r\n\r\n// 创建一个Solidity智能合约，名为 MessageStore ，包含以下功能：\r\n// • 一个公开的状态变量 message 用于存储一个字符串。\r\n// • 一个 setMessage 函数，允许用户输入一个字符串并将其存储到 message 状态变量中。该函数 应使用calldata数据位置。\r\n// • 一个 getMessage 函数，返回 message 状态变量的内容。该函数应声明为external，并使用 memory数据位置。\r\ncontract MessageStore {\r\n    string public message;\r\n\r\n    function setMessage(string calldata newMsg) external {\r\n        message = newMsg;\r\n    }\r\n\r\n    function getMessage() external view returns(string memory){\r\n        return message;\r\n    }\r\n}",
+        "file": "solidity基础/数据存储位置storage、memory、calldata.sol"
       }
     }
   }

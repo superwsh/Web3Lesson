@@ -104,7 +104,7 @@
 	},
 	"settings": {
 		"compilationTarget": {
-			"solidity基础/结构体.sol": "StructContract"
+			"solidity基础/结构体struct.sol": "StructContract"
 		},
 		"evmVersion": "osaka",
 		"libraries": {},
@@ -118,7 +118,7 @@
 		"remappings": []
 	},
 	"sources": {
-		"solidity基础/结构体.sol": {
+		"solidity基础/结构体struct.sol": {
 			"keccak256": "0xf7b331d11a5675425744a9a9550863372bc7b9cad97b9516e96cb2074a01b1bf",
 			"license": "MIT",
 			"urls": [
