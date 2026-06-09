@@ -45,7 +45,7 @@
 	},
 	"settings": {
 		"compilationTarget": {
-			"合约设计和功能/基础1.sol": "HelloWorld"
+			"solidity基础/关键字.sol": "HelloWorld"
 		},
 		"evmVersion": "osaka",
 		"libraries": {},
@@ -59,12 +59,12 @@
 		"remappings": []
 	},
 	"sources": {
-		"合约设计和功能/基础1.sol": {
-			"keccak256": "0x3d0b79b4048000f9869fb4fe6015e0318191b1b6c1cf14fac058e2c4c776771f",
+		"solidity基础/关键字.sol": {
+			"keccak256": "0xc75d10a1de6e13a715218b92389b571070239fb0bc9b964c7c3a2234a84cc682",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://d29d4eca069b27bb086a93c1f7378cff7eba4ee7173d37fb5a4cad020f9ae77d",
-				"dweb:/ipfs/QmaJUQjoyJMduMZSCQzsQM66kZf18h74CyN37972VHQg2d"
+				"bzz-raw://ff1cd26c79adc0953bcebc25b985af8bb4d0302d8106e4c1e8b9ca0ccf7758aa",
+				"dweb:/ipfs/QmdtHAw2K6xysc4xRm6pQ4jUaCu1LKycDWPxyR5tQC4x3v"
 			]
 		}
 	},

@@ -191,7 +191,7 @@
 	},
 	"settings": {
 		"compilationTarget": {
-			"solidity基础/Mapping映射.sol": "MappingCon"
+			"solidity基础/Mapping映射.sol": "MappingContract"
 		},
 		"evmVersion": "osaka",
 		"libraries": {},
@@ -206,11 +206,11 @@
 	},
 	"sources": {
 		"solidity基础/Mapping映射.sol": {
-			"keccak256": "0x4b3584ed1525fa8b7f7d94c23cd6f7606777ddb78cbc37854aa5fa5a09c6b088",
+			"keccak256": "0x43755dc2eed65ddee7fbff06bfd00944354aafbc0f9273a7918453b18487522c",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://c1f82b6162189804d33cae97c96264fdf97b79220ce32ea7d80481e6581626fd",
-				"dweb:/ipfs/QmQxNXrUP7xk3RKK15VpqTiRsk29nq8QkRZgeFQiDhpz59"
+				"bzz-raw://f39ff819f05daee9bfe00e3811eccd97c65b14d90222fc45860e7e4c358223e3",
+				"dweb:/ipfs/QmRKe3cz7XayYSseK82HpnHvoiVXF3d12xJtkNkJqoTpg7"
 			]
 		}
 	},

@@ -10,9 +10,9 @@ contract HelloWorld {
     // returs() 声明返回值类型
     // private  public
     /*
-    storage  永久变量
-    memory   临时变量可修改 
-    calldata 临时常量不可修改
+    storage  链上永久存储
+    memory   内存临时存储
+    calldata 存外部只读数据
     */
     function sayHello() public view returns(string memory){
         return strVar;
