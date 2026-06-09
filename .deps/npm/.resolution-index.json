@@ -232,14 +232,6 @@
       }
     }
   },
-  "solidity基础/结构体struct.sol": {
-    "__sources__": {
-      "solidity基础/结构体struct.sol": {
-        "content": "// SPDX-License-Identifier: MIT\r\npragma solidity ^0.8.7;\r\n\r\ncontract StructContract {\r\n    // 编程作业： \r\n    // 创建一个Solidity智能合约，包含一个名为 Car 的struct，具有以下属性： make\r\n    // (制造商，字符串类型)， year (生产年份，整数类型)，和 owner (所有者，地址类型)。合约应允许\r\n    // 用户：\r\n    // • 添加新的车辆到数组中。\r\n    // • 访问和修改特定车辆的年份。\r\n    // • 删除车辆记录。\r\n    struct Car{\r\n        string make;\r\n        uint year;\r\n        address owner;\r\n    }\r\n\r\n    Car[] public cars;\r\n\r\n    function init() external  {\r\n        Car memory toyota = Car(\"Toyota\", 2000, msg.sender);\r\n        cars.push(toyota);\r\n        Car memory bmw = Car({make:\"BMW\",owner: msg.sender, year:1990});\r\n        cars.push(bmw);\r\n        Car memory tesla;\r\n        tesla.make = \"Tesla\";\r\n        cars.push(tesla);\r\n\r\n        cars.push(Car(\"xiaomi\",2024,msg.sender));\r\n\r\n        Car storage car = cars[0];\r\n        car.year = 1999;\r\n        delete car.owner;\r\n    }\r\n\r\n    function modify(uint index,uint newYear) external {\r\n        cars[index].year = newYear;\r\n    }\r\n\r\n    function addCar(string memory maker,uint year) external {\r\n        Car memory newCar = Car(maker,year,msg.sender);\r\n        cars.push(newCar);\r\n    }\r\n\r\n    function delCar(uint index) external {\r\n        delete cars[index];\r\n    } \r\n}",
-        "file": "solidity基础/结构体struct.sol"
-      }
-    }
-  },
   "solidity基础/枚举enum.sol": {
     "__sources__": {
       "solidity基础/枚举enum.sol": {
@@ -253,6 +245,38 @@
       "solidity基础/数据存储位置storage、memory、calldata.sol": {
         "content": "// SPDX-License-Identifier: MIT\r\npragma solidity ^0.8.7;\r\n\r\ncontract DataLocation {\r\n    // ◦ storage：状态变量，可修改\r\n    // ◦ memory：临时存储，不保存在区块链上，可读写\r\n    // ◦ calldata：函数输入，不可修改，可用于节省 gas\r\n\r\n\r\n    // • 定义一个struct，包含一个字符串和一个整数数组。\r\n    // • 实现两个函数：\r\n    // a. 一个函数用于修改struct的字符串成员，该函数的参数为字符串，使用storage存储数据位置。\r\n    // b. 另一个函数用于读取struct的整数数组成员，该函数的参数为整数数组，使用calldata存储数据\r\n    // 位置，且在函数内部调用时，参数也使用calldata存储位置。\r\n    struct MyStruct {\r\n        string text;\r\n        uint arr;\r\n    }\r\n\r\n    mapping(address => MyStruct) map;\r\n\r\n    function modify(string memory) external {\r\n        map[msg.sender] = MyStruct({text: \"123\", arr:123});\r\n\r\n        MyStruct storage myStruct = map[msg.sender];\r\n        myStruct.text = \"hello\";\r\n    }   \r\n\r\n    function example(uint[] calldata arr) external returns(uint[] memory) {\r\n        _internal(arr);\r\n        uint[] memory newArr = new uint[](3);\r\n        newArr[1] = 888;\r\n        return newArr;\r\n    }\r\n\r\n    function _internal(uint[] calldata arr) private returns(uint) {\r\n        // uint x = arr[0];\r\n    }\r\n}\r\n\r\n\r\n\r\n// 创建一个Solidity智能合约，名为 MessageStore ，包含以下功能：\r\n// • 一个公开的状态变量 message 用于存储一个字符串。\r\n// • 一个 setMessage 函数，允许用户输入一个字符串并将其存储到 message 状态变量中。该函数 应使用calldata数据位置。\r\n// • 一个 getMessage 函数，返回 message 状态变量的内容。该函数应声明为external，并使用 memory数据位置。\r\ncontract MessageStore {\r\n    string public message;\r\n\r\n    function setMessage(string calldata newMsg) external {\r\n        message = newMsg;\r\n    }\r\n\r\n    function getMessage() external view returns(string memory){\r\n        return message;\r\n    }\r\n}",
         "file": "solidity基础/数据存储位置storage、memory、calldata.sol"
+      }
+    }
+  },
+  "solidity基础/结构体struct.sol": {
+    "__sources__": {
+      "solidity基础/结构体struct.sol": {
+        "content": "// SPDX-License-Identifier: MIT\r\npragma solidity ^0.8.7;\r\n\r\ncontract StructContract {\r\n    // 编程作业： \r\n    // 创建一个Solidity智能合约，包含一个名为 Car 的struct，具有以下属性： make\r\n    // (制造商，字符串类型)， year (生产年份，整数类型)，和 owner (所有者，地址类型)。合约应允许\r\n    // 用户：\r\n    // • 添加新的车辆到数组中。\r\n    // • 访问和修改特定车辆的年份。\r\n    // • 删除车辆记录。\r\n    struct Car{\r\n        string make;\r\n        uint year;\r\n        address owner;\r\n    }\r\n\r\n    Car[] public cars;\r\n\r\n    function init() external  {\r\n        Car memory toyota = Car(\"Toyota\", 2000, msg.sender);\r\n        cars.push(toyota);\r\n        Car memory bmw = Car({make:\"BMW\",owner: msg.sender, year:1990});\r\n        cars.push(bmw);\r\n        Car memory tesla;\r\n        tesla.make = \"Tesla\";\r\n        cars.push(tesla);\r\n\r\n        cars.push(Car(\"xiaomi\",2024,msg.sender));\r\n\r\n        Car storage car = cars[0];\r\n        car.year = 1999;\r\n        delete car.owner;\r\n    }\r\n\r\n    function modify(uint index,uint newYear) external {\r\n        cars[index].year = newYear;\r\n    }\r\n\r\n    function addCar(string memory maker,uint year) external {\r\n        Car memory newCar = Car(maker,year,msg.sender);\r\n        cars.push(newCar);\r\n    }\r\n\r\n    function delCar(uint index) external {\r\n        delete cars[index];\r\n    } \r\n}",
+        "file": "solidity基础/结构体struct.sol"
+      }
+    }
+  },
+  "solidity基础/待办列表todoList.sol": {
+    "__sources__": {
+      "solidity基础/待办列表todoList.sol": {
+        "content": "// SPDX-License-Identifier: MIT\r\npragma solidity ^0.8.7;\r\n\r\ncontract ToDoList {\r\n    // 编程作业\r\n    // • 任务：编写一个 Solidity 程序，实现一个简单的待办事项列表。\r\n    // • 要求：\r\n    // a. 定义一个 ToDo 结构体，包含 text （任务描述）和 completed （是否完成）。\r\n    // b. 创建一个 ToDo[] 数组来存储多个任务。\r\n    // c. 实现 create , updateText , 和 toggleCompleted 函数。\r\n    // d. 部署合约到测试网络，并通过界面或命令行测试各个函数的功能。\r\n    struct ToDo {\r\n        string text;\r\n        bool completed;\r\n    }\r\n\r\n    ToDo[] toDoList;\r\n\r\n    function create(string calldata _text) external  {\r\n        toDoList.push(ToDo({\r\n            text: _text,\r\n            completed: false\r\n        }));\r\n    }\r\n\r\n    function updateText(uint index, string calldata newText) external {\r\n        toDoList[index].text = newText;\r\n\r\n        // ToDo storage todo = toDoList[index];\r\n        // todo.text = newText;  这种方式在更新多个字段时更节省gas\r\n    }\r\n\r\n    function toggleCompleted(uint index) external {\r\n        toDoList[index].completed = !toDoList[index].completed;\r\n    }\r\n\r\n    function get(uint index) external view returns (ToDo memory){\r\n        return toDoList[index];\r\n    }\r\n}",
+        "file": "solidity基础/待办列表todoList.sol"
+      }
+    }
+  },
+  "solidity基础/事件Event.sol": {
+    "__sources__": {
+      "solidity基础/事件Event.sol": {
+        "content": "// SPDX-License-Identifier: MIT\r\npragma solidity ^0.8.7;\r\n\r\n\r\n// 事件的定义和用途\r\n// • 事件在区块链上写入数据。\r\n// • 数据无法被智能合约检索。\r\n// • 事件的主要目的是记录某些事情发生的日志。\r\n// • 作为存储数据的状态变量的廉价替代方案。\r\ncontract Event {\r\n    // 使用 index 关键字为事件参数创建索引\r\n    // 通过索引快速搜索事件日志\r\n\r\n\r\n    // 请按照以下要求编写一个 Solidity 智能合约，完成练习：\r\n    // 1. 声明事件：\r\n    // ◦ 声明一个名为LogMessage的事件，包含以下参数：\r\n    // ▪ 发送者地址（ address ，使用 indexed 关键字）\r\n    // ▪ 接收者地址（ address ，使用 indexed 关键字）\r\n    // ▪ 消息内容（ string ）\r\n    // 2. 创建发送消息的函数：创建一个名为sendMessage的函数，该函数包含两个参数：\r\n    // ▪ 接收者地址（ address ）\r\n    // ▪ 消息内容（ string ）\r\n    // ◦ 在函数内部，使用 emit 记录 LogMessage 事件，将发送者地址设为 msg.sender ，接收者地址设为函数参数，消息内容设为函数参数。\r\n    event LogMessage(address indexed from,address indexed to,string  message);\r\n\r\n    function send(address to,string memory text) external {\r\n        emit LogMessage(msg.sender, to, text);\r\n    }\r\n}",
+        "file": "solidity基础/事件Event.sol"
+      }
+    }
+  },
+  "solidity基础/继承virtual.sol": {
+    "__sources__": {
+      "solidity基础/继承virtual.sol": {
+        "content": "// SPDX-License-Identifier: MIT\r\npragma solidity ^0.8.7;\r\n\r\n//=========在父合约的函数声明中使用 virtual 关键字，表明这些函数可以被子合约继承和修改\r\n// 编程作业：Solidity 继承练习\r\n// • 目标\r\n// • ：创建一个 Solidity 程序，包含三个合约：ContractA，ContractB 和 ContractC。\r\n// ◦ ContractA：定义两个函数 foo() 和 bar() ，返回字符串\"A\"。\r\n// ◦ ContractB：继承 ContractA，重写 foo() 和 bar() ，使其返回字符串\"B\"。\r\n// ◦ ContractC：继承 ContractB，只重写 bar() ，使其返回字符串\"C\"。\r\n// • 任务：编写完整的合约代码，编译并部署合约，验证函数调用的结果符合预期。\r\ncontract ContractA {\r\n    function foo() virtual public pure returns(string memory){\r\n        return \"A\";\r\n    }\r\n    function bar() virtual public pure returns(string memory){\r\n        return \"A\";\r\n    }\r\n    function baz() virtual public pure returns(string memory){\r\n        return \"Aaaa\";\r\n    }\r\n}\r\n\r\ncontract ContractB is ContractA {\r\n    function foo() override public pure returns(string memory){\r\n        return \"B\";\r\n    }\r\n    function bar() virtual override public pure returns(string memory){\r\n        return \"B\";\r\n    }\r\n}\r\n\r\ncontract ContractC is ContractB {\r\n     function bar() override public pure returns(string memory){\r\n        return \"C\";\r\n    }\r\n}\r\n\r\n// 【多重继承】\r\n// 编程作业： 编写⼀个Solidity合约，展⽰多重继承的使⽤。包括以下⼏个步骤：\r\n// 1. 定义三个合约A、B和C。 。合约A有⼀个函数 。合约B继承合约A，并重写 。合约C继承合约B和A，并重写\r\n// 2. 确保继承顺序正确：从最基础的合约到派⽣合约。\r\n// 3. 编译并部署合约C ，验证合约C是否继承了所有的函数并重写成功\r\n\r\ncontract A {\r\n    function foo() public pure virtual returns(string memory){\r\n        return \"A\";\r\n    }\r\n    function a() public pure returns(string memory){\r\n        return \"This is A\";\r\n    }\r\n}\r\n\r\ncontract B is A{\r\n    function foo() public pure virtual override returns(string memory){\r\n        return \"A\";\r\n    }\r\n    function b() public pure returns(string memory){\r\n        return \"This is B\";\r\n    }\r\n}\r\n\r\ncontract C is A,B{\r\n     function foo() public pure override(A, B) returns(string memory){\r\n        return \"C\";\r\n    }\r\n}",
+        "file": "solidity基础/继承virtual.sol"
       }
     }
   }
