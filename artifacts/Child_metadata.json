@@ -7,56 +7,52 @@
 		"abi": [
 			{
 				"inputs": [],
-				"stateMutability": "nonpayable",
-				"type": "constructor"
+				"name": "exFunc",
+				"outputs": [
+					{
+						"internalType": "string",
+						"name": "",
+						"type": "string"
+					}
+				],
+				"stateMutability": "pure",
+				"type": "function"
 			},
 			{
 				"inputs": [],
-				"name": "MY_ADDR",
-				"outputs": [
-					{
-						"internalType": "address",
-						"name": "",
-						"type": "address"
-					}
-				],
+				"name": "example",
+				"outputs": [],
 				"stateMutability": "view",
 				"type": "function"
 			},
 			{
 				"inputs": [],
-				"name": "MY_UINT",
+				"name": "example2",
+				"outputs": [],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "pubFunc",
+				"outputs": [
+					{
+						"internalType": "string",
+						"name": "",
+						"type": "string"
+					}
+				],
+				"stateMutability": "pure",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "pubVar",
 				"outputs": [
 					{
 						"internalType": "uint256",
 						"name": "",
 						"type": "uint256"
-					}
-				],
-				"stateMutability": "view",
-				"type": "function"
-			},
-			{
-				"inputs": [],
-				"name": "getOwner",
-				"outputs": [
-					{
-						"internalType": "address",
-						"name": "",
-						"type": "address"
-					}
-				],
-				"stateMutability": "view",
-				"type": "function"
-			},
-			{
-				"inputs": [],
-				"name": "owner",
-				"outputs": [
-					{
-						"internalType": "address",
-						"name": "",
-						"type": "address"
 					}
 				],
 				"stateMutability": "view",
@@ -76,7 +72,7 @@
 	},
 	"settings": {
 		"compilationTarget": {
-			"solidity基础/常量constant和immutable.sol": "Constant"
+			"solidity基础/可见性修饰符.sol": "Child"
 		},
 		"evmVersion": "osaka",
 		"libraries": {},
@@ -90,12 +86,12 @@
 		"remappings": []
 	},
 	"sources": {
-		"solidity基础/常量constant和immutable.sol": {
-			"keccak256": "0x205c4d829c318900735fd2df6a71163c473a326c126f01d7b95ae47f2b4bd345",
+		"solidity基础/可见性修饰符.sol": {
+			"keccak256": "0xdaf4b7f891932a051b2be7631af5993cdc84b384f987dbd09a2d9d3205e4577c",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://cac38dacd12b251768fe6e584cff72367f72eceb0daafae027f85744d36cb547",
-				"dweb:/ipfs/QmdvhimBGpfpFUCuZck3ALn9V6c9unMFJFqf9bghYJXWgW"
+				"bzz-raw://48b3680df0f23a77d5d9e609baa2d25baaef857a0b8c2432100cb7865f087850",
+				"dweb:/ipfs/Qmbym6PXbiDxysagfQmnDUEM85zm9JtZ2LoeQM4auzRP4q"
 			]
 		}
 	},

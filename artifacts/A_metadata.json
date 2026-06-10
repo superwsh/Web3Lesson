@@ -6,29 +6,30 @@
 	"output": {
 		"abi": [
 			{
-				"inputs": [],
-				"name": "a",
-				"outputs": [
+				"anonymous": false,
+				"inputs": [
 					{
+						"indexed": false,
 						"internalType": "string",
-						"name": "",
+						"name": "message",
 						"type": "string"
 					}
 				],
-				"stateMutability": "pure",
+				"name": "Log",
+				"type": "event"
+			},
+			{
+				"inputs": [],
+				"name": "bar",
+				"outputs": [],
+				"stateMutability": "nonpayable",
 				"type": "function"
 			},
 			{
 				"inputs": [],
 				"name": "foo",
-				"outputs": [
-					{
-						"internalType": "string",
-						"name": "",
-						"type": "string"
-					}
-				],
-				"stateMutability": "pure",
+				"outputs": [],
+				"stateMutability": "nonpayable",
 				"type": "function"
 			}
 		],
@@ -45,7 +46,7 @@
 	},
 	"settings": {
 		"compilationTarget": {
-			"solidity基础/继承virtual.sol": "A"
+			"solidity基础/调用父函数super.sol": "A"
 		},
 		"evmVersion": "osaka",
 		"libraries": {},
@@ -59,12 +60,12 @@
 		"remappings": []
 	},
 	"sources": {
-		"solidity基础/继承virtual.sol": {
-			"keccak256": "0xa2684ebfa96b6a2da234fe429f1c45fe0f82ec2db5ce004807042f9d910d902d",
+		"solidity基础/调用父函数super.sol": {
+			"keccak256": "0x400b3b2f087471ad34d6966b542d03829860f9348522b23348d107d804951cd7",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://051ad8396a289bfe045304169701fd5eac4102eb5c2120f6aaf96e4bef998dae",
-				"dweb:/ipfs/Qma2XWzvzGYMZfrVH6GXyd12QY4fxnBorNdXXqKBvQN28X"
+				"bzz-raw://223d80eaaf39f5043dce5a34b4b856579ec11b204e87d5255b124d639a06c27d",
+				"dweb:/ipfs/QmRTf45dZMQn2cCFeWzTZyWtvRzDY9FtAM1JDWXYTDU913"
 			]
 		}
 	},

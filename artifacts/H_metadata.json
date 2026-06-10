@@ -46,7 +46,7 @@
 	},
 	"settings": {
 		"compilationTarget": {
-			"solidity基础/调用父函数super.sol": "B"
+			"solidity基础/调用父函数super.sol": "H"
 		},
 		"evmVersion": "osaka",
 		"libraries": {},
