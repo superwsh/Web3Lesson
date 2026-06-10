@@ -1,0 +1,81 @@
+{
+	"compiler": {
+		"version": "0.8.34+commit.80d5c536"
+	},
+	"language": "Solidity",
+	"output": {
+		"abi": [
+			{
+				"anonymous": false,
+				"inputs": [
+					{
+						"indexed": false,
+						"internalType": "string",
+						"name": "func",
+						"type": "string"
+					},
+					{
+						"indexed": false,
+						"internalType": "address",
+						"name": "sender",
+						"type": "address"
+					},
+					{
+						"indexed": false,
+						"internalType": "uint256",
+						"name": "amount",
+						"type": "uint256"
+					},
+					{
+						"indexed": false,
+						"internalType": "bytes",
+						"name": "data",
+						"type": "bytes"
+					}
+				],
+				"name": "Log",
+				"type": "event"
+			},
+			{
+				"stateMutability": "payable",
+				"type": "fallback"
+			}
+		],
+		"devdoc": {
+			"kind": "dev",
+			"methods": {},
+			"version": 1
+		},
+		"userdoc": {
+			"kind": "user",
+			"methods": {},
+			"version": 1
+		}
+	},
+	"settings": {
+		"compilationTarget": {
+			"solidity金融和支付/falback和receive.sol": "Fallback"
+		},
+		"evmVersion": "osaka",
+		"libraries": {},
+		"metadata": {
+			"bytecodeHash": "ipfs"
+		},
+		"optimizer": {
+			"enabled": false,
+			"runs": 200
+		},
+		"remappings": []
+	},
+	"sources": {
+		"solidity金融和支付/falback和receive.sol": {
+			"keccak256": "0xd6ddcc279f4bb924772e39f2b433a1c7847441516213cfbb3e952f4fc3fef07a",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://f96c0b9f3e0995c8d45dcfa90411899545f9ec2a64e5e7e4c73bae9925a8fcdd",
+				"dweb:/ipfs/QmQzdFDJVuYyyhMvtcDLTG2no1HaSc2pNN396jEaSvwtTT"
+			]
+		}
+	},
+	"version": 1
+}
