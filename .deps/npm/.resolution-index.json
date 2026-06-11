@@ -320,14 +320,6 @@
       }
     }
   },
-  "solidity基础/基础.sol": {
-    "__sources__": {
-      "solidity基础/基础.sol": {
-        "content": "// SPDX-License-Identifier: MIT\r\npragma solidity ^0.8.7;\r\n\r\ncontract HelloWrold {\r\n    string public myStr = \"Hello World!\";\r\n    bool b = true;\r\n    uint public u = 123;//无符号 unit=unit256 数值为0到2^256-1\r\n    int public i = -123;//有符号 数值为-2^255到2^255-1\r\n    int public maxInt = type(int).max;\r\n    int public minInt = type(int).min;\r\n\r\n    address public addr = 0x5B38Da6a701c568545dCfcB03FcB875f56beddC4;\r\n    // bytes32 public b32  \r\n    function add(uint x,uint y) external pure returns(uint){\r\n        return x + y;\r\n    }\r\n    function sub(uint x,uint y) external pure returns(uint){\r\n        return x - y;\r\n    }\r\n\r\n    //view关键字表示函数可以读取状态变量和全局变量\r\n    function viewGlobalInfo() external view returns (address, uint,  uint){\r\n        address sender = msg.sender;//全局变量：调用者地址\r\n        uint timestamp = block.timestamp;//全局变量：时间戳\r\n        uint blockNum = block.number;//全局变量：块高\r\n        return (sender, timestamp, blockNum);\r\n    }\r\n}\r\n\r\n//常量节省gas费\r\ncontract Constant{\r\n    address public constant MY_ADDR = 0xf8e81D47203A594245E36C48e151709F0C19fBe8;//373 gas\r\n    uint public constant MY_UINT = 123;\r\n}\r\ncontract Var{\r\n    address public MY_ADDR = 0xf8e81D47203A594245E36C48e151709F0C19fBe8;//2485 gas\r\n}",
-        "file": "solidity基础/基础.sol"
-      }
-    }
-  },
   "solidity金融和支付/falback和receive1.sol": {
     "__sources__": {
       "solidity金融和支付/falback和receive1.sol": {
@@ -451,14 +443,6 @@
       }
     }
   },
-  "solidity合约交互/委托调用delegatecall.sol": {
-    "__sources__": {
-      "solidity合约交互/委托调用delegatecall.sol": {
-        "content": "// SPDX-License-Identifier: MIT\r\npragma solidity ^0.8.7;\r\n\r\n// delegatecall在另一个合约的上下文中执行代码，最后更新的是自己的状态变量\r\n// 1. 创建两个合约： Caller 和 Callee 。\r\n// 2. 在 Caller 合约中定义一个状态变量 num 。\r\n// 3. 在 Callee 合约中定义一个函数 setNum ，接收一个 uint 参数并更新 Caller 合约中的num 变量。\r\n// 4. 在 Caller 合约中实现一个函数，通过delegatecall调用 Callee 合约的 setNum 函数。\r\n// 5. 部署并调用这些合约，验证 num 变量的更新情况。\r\n contract Caller {\r\n    uint public num;\r\n    function setNum(address addr,uint _num)  public {\r\n        // addr.delegatecall(abi.encodeWithSignature(\"setNum(uint256)\", _num));\r\n        (bool success,) = addr.delegatecall(abi.encodeWithSelector(Callee.setNum.selector, _num));// 和上面一样效果\r\n        require(success, \"Call Failed\");\r\n    }\r\n }\r\n\r\n contract Callee {\r\n    uint public num;\r\n\r\n    function setNum(uint _num)  public {\r\n        num = _num;\r\n    }\r\n }",
-        "file": "solidity合约交互/委托调用delegatecall.sol"
-      }
-    }
-  },
   "solidity合约交互/library.sol": {
     "__sources__": {}
   },
@@ -470,11 +454,35 @@
       }
     }
   },
+  "solidity基础/数据存储位置storage、memory、calldata.sol": {
+    "__sources__": {
+      "solidity基础/数据存储位置storage、memory、calldata.sol": {
+        "content": "// SPDX-License-Identifier: MIT\r\npragma solidity ^0.8.7;\r\n\r\ncontract DataLocation {\r\n    // ◦ storage：状态变量，可修改\r\n    // ◦ memory：临时存储，不保存在区块链上，可读写\r\n    // ◦ calldata：函数输入，不可修改，可用于节省 gas\r\n\r\n\r\n    // • 定义一个struct，包含一个字符串和一个整数数组。\r\n    // • 实现两个函数：\r\n    // a. 一个函数用于修改struct的字符串成员，该函数的参数为字符串，使用storage存储数据位置。\r\n    // b. 另一个函数用于读取struct的整数数组成员，该函数的参数为整数数组，使用calldata存储数据\r\n    // 位置，且在函数内部调用时，参数也使用calldata存储位置。\r\n    struct MyStruct {\r\n        string text;\r\n        uint arr;\r\n    }\r\n\r\n    mapping(address => MyStruct) map;\r\n\r\n    function modify(string memory) external {\r\n        map[msg.sender] = MyStruct({text: \"123\", arr:123});\r\n\r\n        MyStruct storage myStruct = map[msg.sender];\r\n        myStruct.text = \"hello\";\r\n    }   \r\n\r\n    function example(uint[] calldata arr) external returns(uint[] memory) {\r\n        _internal(arr);\r\n        uint[] memory newArr = new uint[](3);\r\n        newArr[1] = 888;\r\n        return newArr;\r\n    }\r\n\r\n    function _internal(uint[] calldata arr) private returns(uint) {\r\n        // uint x = arr[0];\r\n    }\r\n}\r\n\r\n\r\n\r\n// 创建一个Solidity智能合约，名为 MessageStore ，包含以下功能：\r\n// • 一个公开的状态变量 message 用于存储一个字符串。\r\n// • 一个 setMessage 函数，允许用户输入一个字符串并将其存储到 message 状态变量中。该函数 应使用calldata数据位置。\r\n// • 一个 getMessage 函数，返回 message 状态变量的内容。该函数应声明为external，并使用 memory数据位置。\r\ncontract MessageStore {\r\n    string public message;\r\n\r\n    function setMessage(string calldata newMsg) external {\r\n        message = newMsg;\r\n    }\r\n\r\n    function getMessage() external view returns(string memory){\r\n        return message;\r\n    }\r\n}",
+        "file": "solidity基础/数据存储位置storage、memory、calldata.sol"
+      }
+    }
+  },
+  "solidity合约交互/委托调用delegatecall.sol": {
+    "__sources__": {
+      "solidity合约交互/委托调用delegatecall.sol": {
+        "content": "// SPDX-License-Identifier: MIT\r\npragma solidity ^0.8.7;\r\n\r\n// delegatecall在另一个合约的上下文中执行代码，最后更新的是自己的状态变量\r\n// 1. 创建两个合约： Caller 和 Callee 。\r\n// 2. 在 Caller 合约中定义一个状态变量 num 。\r\n// 3. 在 Callee 合约中定义一个函数 setNum ，接收一个 uint 参数并更新 Caller 合约中的num 变量。\r\n// 4. 在 Caller 合约中实现一个函数，通过delegatecall调用 Callee 合约的 setNum 函数。\r\n// 5. 部署并调用这些合约，验证 num 变量的更新情况。\r\n contract Caller {\r\n    uint public num;\r\n    function setNum(address addr,uint _num)  public {\r\n        // addr.delegatecall(abi.encodeWithSignature(\"setNum(uint256)\", _num));\r\n        (bool success,) = addr.delegatecall(abi.encodeWithSelector(Callee.setNum.selector, _num));// 和上面一样效果\r\n        require(success, \"Call Failed\");\r\n    }\r\n }\r\n\r\n contract Callee {\r\n    uint public num;\r\n\r\n    function setNum(uint _num)  public {\r\n        num = _num;\r\n    }\r\n }",
+        "file": "solidity合约交互/委托调用delegatecall.sol"
+      }
+    }
+  },
   "solidity合约交互/合约调用call.sol": {
     "__sources__": {
       "solidity合约交互/合约调用call.sol": {
         "content": "// SPDX-License-Identifier: MIT\r\npragma solidity ^0.8.7;\r\n\r\n// 1. 创建一个名为 TestContract 的合约，包含以下函数：\r\n// ◦ foo(string memory _msg, uint256 _num) : 接受字符串和uint256类型参数，并更新状态变量 message 和 number 。\r\n// ◦ fallback() external : 回退函数，记录日志\"Fallback was called\"。\r\n// 2. 创建一个名为 Caller 的合约，包含以下函数：\r\n// ◦ callFoo(address _testContract, string memory _msg, uint256 _num) :\r\n// 使用call调用 TestContract 合约中的 foo 函数，并传递参数和发送以太币。\r\n// ◦ callNonExistentFunction(address _testContract) : 使用call调用一个不存在的函数，验证回退函数是否被调用。\r\n\r\ncontract TestContract {\r\n    string  public  message;\r\n    uint256 public number;\r\n    event Log(address sender,string message);\r\n\r\n    function foo(string memory _msg,uint256 num) external payable returns(bool, uint) {\r\n        message = _msg;\r\n        number = num;\r\n        return (true, 888);\r\n    }\r\n\r\n    receive() external payable { }\r\n    // fallback() external payable { \r\n    //     emit Log(msg.sender, \"Fallback was called\");\r\n    // }\r\n}\r\n\r\n\r\ncontract Caller {\r\n    bytes public data;\r\n    function callFoo(address testAddr,string memory message,uint256 num) public payable {\r\n       (bool success,bytes memory _data) = testAddr.call{value: 123}(abi.encodeWithSignature(\"foo(string,uint256)\", message,num));\r\n        require(success, \"Call failed\");\r\n        data = _data;\r\n    }\r\n\r\n    function callNonExistentFunction(address testAddr) public  {\r\n        (bool success,) = testAddr.call(abi.encodeWithSignature(\"noExist()\"));\r\n        require(success, \"Call Failed\");\r\n    }\r\n}",
         "file": "solidity合约交互/合约调用call.sol"
+      }
+    }
+  },
+  "solidity合约交互/代码重用library.sol": {
+    "__sources__": {
+      "solidity合约交互/代码重用library.sol": {
+        "content": "// SPDX-License-Identifier: MIT\r\npragma solidity ^0.8.7;\r\n\r\n// 1. 创建一个名为 MathLib 的Library，包含一个 min 函数，用于返回两个 uint 类型整数中的较小值。\r\n// 2. 创建一个名为 ArrayUtils 的Library，包含一个 sum 函数，用于计算并返回 uint 类型数组中所有元素的和。\r\n// 3. 在测试合约中使用这两个Library，验证其功能。\r\nlibrary MathLib {\r\n    function min(uint x,uint y) internal pure returns(uint) {\r\n        return x < y ? x:y;\r\n    }\r\n}\r\n\r\nlibrary ArrayUtils {\r\n    function sum(uint[] storage arr) internal view returns(uint) {\r\n        uint total;\r\n        for (uint i=0; i < arr.length ;i++){\r\n            total += arr[i];\r\n        }\r\n        return total;\r\n    }\r\n}\r\n\r\ncontract TestLibrary {\r\n    using ArrayUtils for uint[]; // 数据类型增强，表名uint数组可以直接使用ArrayUtils的函数\r\n    uint[] public arr = [1,2,3];\r\n\r\n    function testMin() public pure returns (uint){\r\n        return MathLib.min(8,5);\r\n    }\r\n\r\n    function testSum()  public view returns (uint){\r\n        // return ArrayUtils.sum(arr);\r\n        return arr.sum(); // 和上面一样\r\n    }\r\n}",
+        "file": "solidity合约交互/代码重用library.sol"
       }
     }
   },
@@ -486,11 +494,27 @@
       }
     }
   },
-  "solidity基础/数据存储位置storage、memory、calldata.sol": {
+  "solidity基础/基础.sol": {
     "__sources__": {
-      "solidity基础/数据存储位置storage、memory、calldata.sol": {
-        "content": "// SPDX-License-Identifier: MIT\r\npragma solidity ^0.8.7;\r\n\r\ncontract DataLocation {\r\n    // ◦ storage：状态变量，可修改\r\n    // ◦ memory：临时存储，不保存在区块链上，可读写\r\n    // ◦ calldata：函数输入，不可修改，可用于节省 gas\r\n\r\n\r\n    // • 定义一个struct，包含一个字符串和一个整数数组。\r\n    // • 实现两个函数：\r\n    // a. 一个函数用于修改struct的字符串成员，该函数的参数为字符串，使用storage存储数据位置。\r\n    // b. 另一个函数用于读取struct的整数数组成员，该函数的参数为整数数组，使用calldata存储数据\r\n    // 位置，且在函数内部调用时，参数也使用calldata存储位置。\r\n    struct MyStruct {\r\n        string text;\r\n        uint arr;\r\n    }\r\n\r\n    mapping(address => MyStruct) map;\r\n\r\n    function modify(string memory) external {\r\n        map[msg.sender] = MyStruct({text: \"123\", arr:123});\r\n\r\n        MyStruct storage myStruct = map[msg.sender];\r\n        myStruct.text = \"hello\";\r\n    }   \r\n\r\n    function example(uint[] calldata arr) external returns(uint[] memory) {\r\n        _internal(arr);\r\n        uint[] memory newArr = new uint[](3);\r\n        newArr[1] = 888;\r\n        return newArr;\r\n    }\r\n\r\n    function _internal(uint[] calldata arr) private returns(uint) {\r\n        // uint x = arr[0];\r\n    }\r\n}\r\n\r\n\r\n\r\n// 创建一个Solidity智能合约，名为 MessageStore ，包含以下功能：\r\n// • 一个公开的状态变量 message 用于存储一个字符串。\r\n// • 一个 setMessage 函数，允许用户输入一个字符串并将其存储到 message 状态变量中。该函数 应使用calldata数据位置。\r\n// • 一个 getMessage 函数，返回 message 状态变量的内容。该函数应声明为external，并使用 memory数据位置。\r\ncontract MessageStore {\r\n    string public message;\r\n\r\n    function setMessage(string calldata newMsg) external {\r\n        message = newMsg;\r\n    }\r\n\r\n    function getMessage() external view returns(string memory){\r\n        return message;\r\n    }\r\n}",
-        "file": "solidity基础/数据存储位置storage、memory、calldata.sol"
+      "solidity基础/基础.sol": {
+        "content": "// SPDX-License-Identifier: MIT\r\npragma solidity ^0.8.7;\r\n\r\ncontract HelloWrold {\r\n    string public myStr = \"Hello World!\";\r\n    bool b = true;\r\n    uint public u = 123;//无符号 unit=unit256 数值为0到2^256-1\r\n    int public i = -123;//有符号 数值为-2^255到2^255-1\r\n    int public maxInt = type(int).max;\r\n    int public minInt = type(int).min;\r\n\r\n    address public addr = 0x5B38Da6a701c568545dCfcB03FcB875f56beddC4;\r\n    // bytes32 public b32  \r\n    function add(uint x,uint y) external pure returns(uint){\r\n        return x + y;\r\n    }\r\n    function sub(uint x,uint y) external pure returns(uint){\r\n        return x - y;\r\n    }\r\n\r\n    //view关键字表示函数可以读取状态变量和全局变量\r\n    function viewGlobalInfo() external view returns (address, uint,  uint){\r\n        address sender = msg.sender;//全局变量：调用者地址\r\n        uint timestamp = block.timestamp;//全局变量：时间戳\r\n        uint blockNum = block.number;//全局变量：块高\r\n        return (sender, timestamp, blockNum);\r\n    }\r\n}\r\n\r\n//常量节省gas费\r\ncontract Constant{\r\n    address public constant MY_ADDR = 0xf8e81D47203A594245E36C48e151709F0C19fBe8;//373 gas\r\n    uint public constant MY_UINT = 123;\r\n}\r\ncontract Var{\r\n    address public MY_ADDR = 0xf8e81D47203A594245E36C48e151709F0C19fBe8;//2485 gas\r\n}",
+        "file": "solidity基础/基础.sol"
+      }
+    }
+  },
+  "签名和验证/keccak256签名.sol": {
+    "__sources__": {
+      "签名和验证/keccak256签名.sol": {
+        "content": "// SPDX-License-Identifier: MIT\r\npragma solidity ^0.8.7;\r\n\r\n// Keccak256的常见用例：签名、生成唯一ID、防止抢跑（Commit-Reveal机制）\r\n// abi.encode 和 abi.encodePacked 的区别： \r\n// abi.encode 保留更多信息，abi.encodePacked 压缩数据\r\n// 避免哈希冲突：通过添加一个额外的整数参数，改变输入顺序，避免哈希冲突\r\n\r\n\r\n// 创建一个名为 MyHash 的合约，其中包含以下功能：\r\n// ◦ 函数 hashFunction ：接受字符串 text 、整数 num 和地址 addr 作为参数，返回这些参数的Keccak256哈希值。\r\n// ◦ 函数 encodeFunction ：接受两个字符串 text0 和 text1 ，使用abi.encode 编码并返回结果。\r\n// ◦ 函数 encodePackedFunction ：接受两个字符串 text0 和 text1 ，使用abi.encodePacked 编码并返回结果。\r\n// ◦ 函数 collisionFunction ：接受两个字符串 text0 和 text1 ，使用abi.encodePacked 编码并返回Keccak256哈希值。\r\ncontract MyHash {\r\n    function hashFunction(string memory text,uint num,address addr) external pure returns(bytes32){\r\n       return keccak256(abi.encodePacked(text,num,addr));\r\n    }\r\n\r\n    function encodeFunction(string memory text0,string memory text1) external pure returns(bytes memory) {\r\n        return abi.encode(text0, text1);\r\n    }\r\n\r\n    function encodePackedFunction(string memory text0,string memory text1) external pure returns(bytes memory){\r\n        return abi.encodePacked(text0,text1);\r\n    }\r\n\r\n    function collisionFunction(string memory text0,uint num,string memory text1) external pure returns(bytes memory){\r\n        return abi.encodePacked(text0, num, text1);\r\n    }\r\n}",
+        "file": "签名和验证/keccak256签名.sol"
+      }
+    }
+  },
+  "签名和验证/keccak256哈希.sol": {
+    "__sources__": {
+      "签名和验证/keccak256哈希.sol": {
+        "content": "// SPDX-License-Identifier: MIT\r\npragma solidity ^0.8.7;\r\n\r\n// Keccak256的常见用例：签名、生成唯一ID、防止抢跑（Commit-Reveal机制）\r\n// abi.encode 和 abi.encodePacked 的区别： \r\n// abi.encode 保留更多信息，abi.encodePacked 压缩数据\r\n// 避免哈希冲突：通过添加一个额外的整数参数，改变输入顺序，避免哈希冲突\r\n\r\n\r\n// 创建一个名为 MyHash 的合约，其中包含以下功能：\r\n// ◦ 函数 hashFunction ：接受字符串 text 、整数 num 和地址 addr 作为参数，返回这些参数的Keccak256哈希值。\r\n// ◦ 函数 encodeFunction ：接受两个字符串 text0 和 text1 ，使用abi.encode 编码并返回结果。\r\n// ◦ 函数 encodePackedFunction ：接受两个字符串 text0 和 text1 ，使用abi.encodePacked 编码并返回结果。\r\n// ◦ 函数 collisionFunction ：接受两个字符串 text0 和 text1 ，使用abi.encodePacked 编码并返回Keccak256哈希值。\r\ncontract MyHash {\r\n    function hashFunction(string memory text,uint num,address addr) external pure returns(bytes32){\r\n       return keccak256(abi.encodePacked(text,num,addr));\r\n    }\r\n\r\n    function encodeFunction(string memory text0,string memory text1) external pure returns(bytes memory) {\r\n        return abi.encode(text0, text1);\r\n    }\r\n\r\n    function encodePackedFunction(string memory text0,string memory text1) external pure returns(bytes memory){\r\n        return abi.encodePacked(text0,text1);\r\n    }\r\n\r\n    function collisionFunction(string memory text0,uint num,string memory text1) external pure returns(bytes memory){\r\n        return abi.encodePacked(text0, num, text1);\r\n    }\r\n}",
+        "file": "签名和验证/keccak256哈希.sol"
       }
     }
   },
@@ -499,14 +523,6 @@
       "solidity基础/数组.sol": {
         "content": "// SPDX-License-Identifier: MIT\r\npragma solidity ^0.8.0;\r\n\r\ncontract array{\r\n    uint[] public nums = [1, 2, 3];\r\n    uint[3] public fixedNums = [4, 5, 6];\r\n    uint[] public numArr = [1,2,3];\r\n\r\n    function example() public {\r\n        nums.push(4);// [1,2,3,4]\r\n        nums[2] = 888;// [1,2,888,4]\r\n        delete nums[1];// [1,0,888,4]\r\n        nums.pop();// [1,0,888]\r\n\r\n        uint[] memory arr = new uint[](5) ;// 临时创建数组\r\n        arr[1] = 22;\r\n    }\r\n    \r\n    function getLength() public view returns (uint){\r\n        return nums.length;\r\n    }\r\n\r\n     // 通过平移算法删除数组中的元素（效率低，消耗gas多）\r\n    function removeEle(uint[] memory newArr, uint index) public returns (uint[] memory){\r\n        require(index < newArr.length, \"index out of bound\");\r\n        numArr = newArr;\r\n        for (uint i = index;i < numArr.length - 1;i++) {\r\n            numArr[i]= numArr[i+1];\r\n        }\r\n        numArr.pop();\r\n        return numArr;\r\n    }\r\n}",
         "file": "solidity基础/数组.sol"
-      }
-    }
-  },
-  "solidity合约交互/代码重用library.sol": {
-    "__sources__": {
-      "solidity合约交互/代码重用library.sol": {
-        "content": "// SPDX-License-Identifier: MIT\r\npragma solidity ^0.8.7;\r\n\r\n// 1. 创建一个名为 MathLib 的Library，包含一个 min 函数，用于返回两个 uint 类型整数中的较小值。\r\n// 2. 创建一个名为 ArrayUtils 的Library，包含一个 sum 函数，用于计算并返回 uint 类型数组中所有元素的和。\r\n// 3. 在测试合约中使用这两个Library，验证其功能。\r\nlibrary MathLib {\r\n    function min(uint x,uint y) internal pure returns(uint) {\r\n        return x < y ? x:y;\r\n    }\r\n}\r\n\r\nlibrary ArrayUtils {\r\n    function sum(uint[] storage arr) internal view returns(uint) {\r\n        uint total;\r\n        for (uint i=0; i < arr.length ;i++){\r\n            total += arr[i];\r\n        }\r\n        return total;\r\n    }\r\n}\r\n\r\ncontract TestLibrary {\r\n    using ArrayUtils for uint[]; // 数据类型增强，表名uint数组可以直接使用ArrayUtils的函数\r\n    uint[] public arr = [1,2,3];\r\n\r\n    function testMin() public pure returns (uint){\r\n        return MathLib.min(8,5);\r\n    }\r\n\r\n    function testSum()  public view returns (uint){\r\n        // return ArrayUtils.sum(arr);\r\n        return arr.sum(); // 和上面一样\r\n    }\r\n}",
-        "file": "solidity合约交互/代码重用library.sol"
       }
     }
   }
