@@ -20,8 +20,8 @@ contract CallerContract {
        return target.getX();
     }
 
-    function setXWithEther(TargetContract target,uint value,uint amount) external payable {
-        target.setXAndReceiveEther(value,amount);
+    function setXWithEther(TargetContract target,uint value) external payable {
+        target.setXAndReceiveEther{value: msg.value}(value);
     }
 
     function getXAndValueFromTarget(TargetContract target) external view returns(uint value ,uint amount)  {
@@ -41,8 +41,8 @@ contract TargetContract {
         return value;
     }
 
-    function setXAndReceiveEther(uint newValue,uint newAmount) external payable {
-        value = newValue;
+    function setXAndReceiveEther(uint newAmount) external payable {
+        value = msg.value;
         amount = newAmount;
     }
 

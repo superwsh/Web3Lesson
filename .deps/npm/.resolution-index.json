@@ -419,14 +419,6 @@
       }
     }
   },
-  "solidity金融和支付/接收receive和回退fallback.sol": {
-    "__sources__": {
-      "solidity金融和支付/接收receive和回退fallback.sol": {
-        "content": "// SPDX-License-Identifier: MIT\r\npragma solidity ^0.8.7;\r\n\r\n// • Fallback函数的执行条件\r\n// ◦ 当调用的函数不存在且 msg.data 不为空时执行\r\n// • Receive函数的执行条件\r\n// ◦ 当 msg.data 为空时执行\r\ncontract Fallback {\r\n    // 作业内容：编写一个包含Fallback和Receive函数的Solidity合约，并测试其行为。\r\n    // 要求：\r\n    // 1. 定义一个可以接收Ether的合约，包含Fallback和Receive函数。\r\n    // 2. Fallback函数应记录调用者地址、发送的金额和数据。\r\n    // 3. Receive函数应记录调用者地址和发送的金额。\r\n    // 4. 部署合约并测试：\r\n    // ◦ 发送带数据的Ether，验证Fallback函数被调用。\r\n    // ◦ 发送不带数据的Ether，验证Receive函数被调用。\r\n    // ◦ 删除Receive函数，再次发送不带数据的Ether，验证Fallback函数被调用。\r\n\r\n    event Log(string func,address sender,uint amount,bytes data);\r\n\r\n    fallback() external payable { \r\n        emit Log(\"fallback\",msg.sender, msg.value, msg.data);\r\n    }\r\n\r\n    receive() external payable {\r\n        emit Log(\"receive\",msg.sender, msg.value, \"\");\r\n    }\r\n}",
-        "file": "solidity金融和支付/接收receive和回退fallback.sol"
-      }
-    }
-  },
   "solidity金融和支付/简易钱包.sol": {
     "__sources__": {
       "solidity金融和支付/简易钱包.sol": {
@@ -443,10 +435,18 @@
       }
     }
   },
+  "solidity金融和支付/接收receive和回退fallback.sol": {
+    "__sources__": {
+      "solidity金融和支付/接收receive和回退fallback.sol": {
+        "content": "// SPDX-License-Identifier: MIT\r\npragma solidity ^0.8.7;\r\n\r\n// • Fallback函数的执行条件\r\n// ◦ 当调用的函数不存在且 msg.data 不为空时执行\r\n// • Receive函数的执行条件\r\n// ◦ 当 msg.data 为空时执行\r\ncontract Fallback {\r\n    // 作业内容：编写一个包含Fallback和Receive函数的Solidity合约，并测试其行为。\r\n    // 要求：\r\n    // 1. 定义一个可以接收Ether的合约，包含Fallback和Receive函数。\r\n    // 2. Fallback函数应记录调用者地址、发送的金额和数据。\r\n    // 3. Receive函数应记录调用者地址和发送的金额。\r\n    // 4. 部署合约并测试：\r\n    // ◦ 发送带数据的Ether，验证Fallback函数被调用。\r\n    // ◦ 发送不带数据的Ether，验证Receive函数被调用。\r\n    // ◦ 删除Receive函数，再次发送不带数据的Ether，验证Fallback函数被调用。\r\n\r\n    event Log(string func,address sender,uint amount,bytes data);\r\n\r\n    fallback() external payable { \r\n        emit Log(\"fallback\",msg.sender, msg.value, msg.data);\r\n    }\r\n\r\n    receive() external payable {\r\n        emit Log(\"receive\",msg.sender, msg.value, \"\");\r\n    }\r\n}",
+        "file": "solidity金融和支付/接收receive和回退fallback.sol"
+      }
+    }
+  },
   "solidity金融和支付/合约调用.sol": {
     "__sources__": {
       "solidity金融和支付/合约调用.sol": {
-        "content": "// SPDX-License-Identifier: MIT\r\npragma solidity ^0.8.7;\r\n\r\n// 编写一个智能合约，包含以下功能：\r\n// 1. 合约初始化和调用\r\n// ◦ 创建一个合约 MyCallerContract ，用于调用目标合约 MyTargetContract 。\r\n// ◦ 在 MyCallerContract 中编写一个函数 setTargetX ，调用 MyTargetContract的 setX 函数，并传递参数。\r\n// 2. 直接调用\r\n// ◦ 在 MyCallerContract 中编写一个函数 getTargetX ，直接调用MyTargetContract 的 getX 函数，并返回结果。\r\n// 3. 传递Ether\r\n// ◦ 在 MyCallerContract 中编写一个函数 setXWithEther ，调用MyTargetContract 的 setXAndReceiveEther 函数，并传递Ether值。\r\n// 4. 处理多个返回值\r\n// ◦ 在 MyCallerContract 中编写一个函数 getXAndValueFromTarget ，调用MyTargetContract 的 getXAndValue 函数，并返回多个输出值。\r\ncontract CallerContract {\r\n    function setTargetX(address targetAddr,uint value) public {\r\n        TargetContract(targetAddr).setX(value);\r\n    }\r\n\r\n    function getTargetX(TargetContract target) public view  returns(uint) {\r\n       return target.getX();\r\n    }\r\n\r\n    function setXWithEther(TargetContract target,uint value,uint amount) external payable {\r\n        target.setXAndReceiveEther(value,amount);\r\n    }\r\n\r\n    function getXAndValueFromTarget(TargetContract target) external view returns(uint value ,uint amount)  {\r\n        (value,amount) = target.getXAndValue();\r\n    \r\n    }\r\n}\r\n\r\ncontract TargetContract {\r\n    uint public value;\r\n    uint public amount;\r\n    function setX(uint newValue) external {\r\n        value = newValue;\r\n    }\r\n\r\n     function getX() external view returns(uint x) {\r\n        return value;\r\n    }\r\n\r\n    function setXAndReceiveEther(uint newValue,uint newAmount) external payable {\r\n        value = newValue;\r\n        amount = newAmount;\r\n    }\r\n\r\n    function getXAndValue() external view returns(uint,uint){\r\n        return (value,amount);\r\n    }\r\n}",
+        "content": "// SPDX-License-Identifier: MIT\r\npragma solidity ^0.8.7;\r\n\r\n// 编写一个智能合约，包含以下功能：\r\n// 1. 合约初始化和调用\r\n// ◦ 创建一个合约 MyCallerContract ，用于调用目标合约 MyTargetContract 。\r\n// ◦ 在 MyCallerContract 中编写一个函数 setTargetX ，调用 MyTargetContract的 setX 函数，并传递参数。\r\n// 2. 直接调用\r\n// ◦ 在 MyCallerContract 中编写一个函数 getTargetX ，直接调用MyTargetContract 的 getX 函数，并返回结果。\r\n// 3. 传递Ether\r\n// ◦ 在 MyCallerContract 中编写一个函数 setXWithEther ，调用MyTargetContract 的 setXAndReceiveEther 函数，并传递Ether值。\r\n// 4. 处理多个返回值\r\n// ◦ 在 MyCallerContract 中编写一个函数 getXAndValueFromTarget ，调用MyTargetContract 的 getXAndValue 函数，并返回多个输出值。\r\ncontract CallerContract {\r\n    function setTargetX(address targetAddr,uint value) public {\r\n        TargetContract(targetAddr).setX(value);\r\n    }\r\n\r\n    function getTargetX(TargetContract target) public view  returns(uint) {\r\n       return target.getX();\r\n    }\r\n\r\n    function setXWithEther(TargetContract target,uint value) external payable {\r\n        target.setXAndReceiveEther{value: msg.value}(value);\r\n    }\r\n\r\n    function getXAndValueFromTarget(TargetContract target) external view returns(uint value ,uint amount)  {\r\n        (value,amount) = target.getXAndValue();\r\n    \r\n    }\r\n}\r\n\r\ncontract TargetContract {\r\n    uint public value;\r\n    uint public amount;\r\n    function setX(uint newValue) external {\r\n        value = newValue;\r\n    }\r\n\r\n     function getX() external view returns(uint x) {\r\n        return value;\r\n    }\r\n\r\n    function setXAndReceiveEther(uint newAmount) external payable {\r\n        value = msg.value;\r\n        amount = newAmount;\r\n    }\r\n\r\n    function getXAndValue() external view returns(uint,uint){\r\n        return (value,amount);\r\n    }\r\n}",
         "file": "solidity金融和支付/合约调用.sol"
       }
     }

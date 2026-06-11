@@ -77,11 +77,6 @@
 						"internalType": "uint256",
 						"name": "value",
 						"type": "uint256"
-					},
-					{
-						"internalType": "uint256",
-						"name": "amount",
-						"type": "uint256"
 					}
 				],
 				"name": "setXWithEther",
@@ -118,11 +113,11 @@
 	},
 	"sources": {
 		"solidity金融和支付/合约调用.sol": {
-			"keccak256": "0xc6c5c65523b7fad28a97dd9d9321340b6a4fbfbd351ca7fbc7c45c5505c0ca11",
+			"keccak256": "0xaf4a7b3277e201f4dea6ebb688bb459c35f660c682dac6fd127115db0a039d20",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://57a689ac44659676d22d74c101e687e0a589e018e3ecbcb1300e09e297fd291b",
-				"dweb:/ipfs/Qmb8gmXC3JoxbyDmfpBkaUveB696xzYXuoXRcWVgDCKwva"
+				"bzz-raw://e2fd449e9ead7088b4b28a19cdae5f8c9531a0b933f573a3dc3d535c781fc5a8",
+				"dweb:/ipfs/QmTpQwbPreGAHpiSBwE5kqHL3eKjcrVvHzRTLGoq2r9JJZ"
 			]
 		}
 	},
