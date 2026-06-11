@@ -1,0 +1,45 @@
+{
+	"compiler": {
+		"version": "0.8.34+commit.80d5c536"
+	},
+	"language": "Solidity",
+	"output": {
+		"abi": [],
+		"devdoc": {
+			"kind": "dev",
+			"methods": {},
+			"version": 1
+		},
+		"userdoc": {
+			"kind": "user",
+			"methods": {},
+			"version": 1
+		}
+	},
+	"settings": {
+		"compilationTarget": {
+			"solidity合约交互/代码重用library.sol": "ArrayUtils"
+		},
+		"evmVersion": "osaka",
+		"libraries": {},
+		"metadata": {
+			"bytecodeHash": "ipfs"
+		},
+		"optimizer": {
+			"enabled": false,
+			"runs": 200
+		},
+		"remappings": []
+	},
+	"sources": {
+		"solidity合约交互/代码重用library.sol": {
+			"keccak256": "0xa04d37aa1550b630e2dfdf505c4864e0c4af931087f774f4a349e38ded528290",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://2375874077688f7834663c03c16d6b01672d55202b558fc9032309887e44de4d",
+				"dweb:/ipfs/QmXBspoPTteB2ryFEJjEK14sLc1t38o7AJuonCTmXSSSzU"
+			]
+		}
+	},
+	"version": 1
+}

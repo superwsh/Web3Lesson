@@ -6,27 +6,30 @@
 	"output": {
 		"abi": [
 			{
-				"anonymous": false,
-				"inputs": [
+				"inputs": [],
+				"name": "num",
+				"outputs": [
 					{
-						"indexed": false,
 						"internalType": "uint256",
-						"name": "amount",
-						"type": "uint256"
-					},
-					{
-						"indexed": false,
-						"internalType": "uint256",
-						"name": "gas",
+						"name": "",
 						"type": "uint256"
 					}
 				],
-				"name": "Log",
-				"type": "event"
+				"stateMutability": "view",
+				"type": "function"
 			},
 			{
-				"stateMutability": "payable",
-				"type": "receive"
+				"inputs": [
+					{
+						"internalType": "uint256",
+						"name": "_num",
+						"type": "uint256"
+					}
+				],
+				"name": "setNum",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
 			}
 		],
 		"devdoc": {
@@ -42,7 +45,7 @@
 	},
 	"settings": {
 		"compilationTarget": {
-			"solidity金融和支付/发送以太币transfer、send、call.sol": "Receiver"
+			"solidity合约交互/委托调用delegatecall.sol": "Callee"
 		},
 		"evmVersion": "osaka",
 		"libraries": {},
@@ -56,12 +59,12 @@
 		"remappings": []
 	},
 	"sources": {
-		"solidity金融和支付/发送以太币transfer、send、call.sol": {
-			"keccak256": "0x649bf705cb7b71393e721266d9b431a724e0851f9317019d3b87c649feae51b6",
+		"solidity合约交互/委托调用delegatecall.sol": {
+			"keccak256": "0xbdf3ee04d42e43a368609f4a74695c76dd50cbfd01e860ca55fb6663f222c77e",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://a27dfc80a3a523a607f0a3776789a6f8928da3b946078669dd9373a35b54d2b5",
-				"dweb:/ipfs/QmX9ifH8AVZu92rusQfNweP4ymwdyKJYJ3QyW7rB1zJtj3"
+				"bzz-raw://948c676c3ed00a321f2ff3946c21187d01eb0b697f6ef38b77b7f0ce38069482",
+				"dweb:/ipfs/QmSsz1aTF3SMHDitGbB1HpiGwKUCfid68SPuqSRL8Lwy2k"
 			]
 		}
 	},

@@ -1,0 +1,57 @@
+{
+	"compiler": {
+		"version": "0.8.34+commit.80d5c536"
+	},
+	"language": "Solidity",
+	"output": {
+		"abi": [
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "_owner",
+						"type": "address"
+					}
+				],
+				"stateMutability": "payable",
+				"type": "constructor"
+			}
+		],
+		"devdoc": {
+			"kind": "dev",
+			"methods": {},
+			"version": 1
+		},
+		"userdoc": {
+			"kind": "user",
+			"methods": {},
+			"version": 1
+		}
+	},
+	"settings": {
+		"compilationTarget": {
+			"solidity合约交互/创建新合约new.sol": "Account"
+		},
+		"evmVersion": "osaka",
+		"libraries": {},
+		"metadata": {
+			"bytecodeHash": "ipfs"
+		},
+		"optimizer": {
+			"enabled": false,
+			"runs": 200
+		},
+		"remappings": []
+	},
+	"sources": {
+		"solidity合约交互/创建新合约new.sol": {
+			"keccak256": "0x8d204a89cb6a938243a0a5a893961a7a209a846b252b764d36c986fdcba046b9",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://0610500e1ed7351893912996d342989e3917aa2914b14cf3f340f6739ccc7900",
+				"dweb:/ipfs/QmTAeBJAv8za8iEJAQSnuw81yudGjRy36ANNZa6mEMtFVB"
+			]
+		}
+	},
+	"version": 1
+}
