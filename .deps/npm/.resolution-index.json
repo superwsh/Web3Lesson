@@ -557,5 +557,13 @@
         "file": "solidity签名和验证/访问控制.sol"
       }
     }
+  },
+  "solidity签名和验证/签名验证.sol": {
+    "__sources__": {
+      "solidity签名和验证/签名验证.sol": {
+        "content": "// SPDX-License-Identifier: MIT\r\npragma solidity ^0.8.7;\r\n\r\n\r\ncontract SignatureVerify {\r\n    // 1. verify 函数，用于验证签名。\r\n    // 签名由小狐狸生成（Account地址和哈希作为参数）\r\n    function verify(string memory message, bytes memory sign,address signer) external pure returns (bool){\r\n        bytes32 msgHash = getMessageHash(message);\r\n        bytes32 ethSignedMsgHash = getEthSignedMessageHash(msgHash);\r\n        return recover(ethSignedMsgHash, sign) == signer;\r\n    }\r\n\r\n    // 2. getMessageHash 函数，用于生成消息哈希。\r\n    function getMessageHash(string memory message) public  pure returns(bytes32) {\r\n        return keccak256(abi.encodePacked(message));\r\n    }\r\n\r\n    // 3. getEthSignedMessageHash 函数，用于生成Ethereum签名消息哈希。\r\n    function getEthSignedMessageHash(bytes32 messageHash) public pure returns(bytes32) {\r\n        return keccak256(abi.encodePacked(\"\\x19Ethereum Signed Message:\\n32\", messageHash));\r\n    }\r\n\r\n    // 4. recover 函数，用于恢复签名者地址。\r\n    function recover(bytes32 ethSignedMessageHash, bytes memory sign) public  pure returns(address) {\r\n        (bytes32 r,bytes32 s,uint8 v) = splitSignature(sign);\r\n        return ecrecover(ethSignedMessageHash, v, r, s);\r\n    }\r\n\r\n    // 5. splitSignature 函数，用于拆分签名。\r\n    function splitSignature(bytes memory sign) internal pure returns(bytes32 r, bytes32 s, uint8 v) {\r\n        assembly {\r\n            r := mload(add(sign, 32))\r\n            s := mload(add(sign, 64))\r\n            v := byte(0,mload(add(sign, 96)))\r\n        }\r\n    }\r\n}",
+        "file": "solidity签名和验证/签名验证.sol"
+      }
+    }
   }
 }

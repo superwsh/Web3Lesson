@@ -4,6 +4,7 @@ pragma solidity ^0.8.7;
 
 contract SignatureVerify {
     // 1. verify 函数，用于验证签名。
+    // 签名由小狐狸生成（Account地址和哈希作为参数）
     function verify(string memory message, bytes memory sign,address signer) external pure returns (bool){
         bytes32 msgHash = getMessageHash(message);
         bytes32 ethSignedMsgHash = getEthSignedMessageHash(msgHash);
