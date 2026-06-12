@@ -1,7 +1,7 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.7;
 
-// delegatecall在另一个合约的上下文中执行代码，最后更新的是自己的状态变量
+// delegatecall在另一个合约的上下文中执行代码，最后更新的是自己的状态变量，花费的是自己的eth
 // 1. 创建两个合约： Caller 和 Callee 。
 // 2. 在 Caller 合约中定义一个状态变量 num 。
 // 3. 在 Callee 合约中定义一个函数 setNum ，接收一个 uint 参数并更新 Caller 合约中的num 变量。

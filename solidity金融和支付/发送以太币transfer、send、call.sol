@@ -18,14 +18,14 @@ pragma solidity ^0.8.7;
     
     constructor() payable {} // 部署合约时接受以太币
 
-    function transferEth(address payable  to, uint amount) external {
-        to.transfer(amount);
-    }
+    // function transferEth(address payable  to, uint amount) external {
+    //     to.transfer(amount);
+    // }
 
-     function sendEth(address payable  to, uint amount) external {
-       bool success =  to.send(amount);
-       require(success, "send failed");
-    }
+    //  function sendEth(address payable  to, uint amount) external {
+    //    bool success =  to.send(amount);
+    //    require(success, "send failed");
+    // }
 
     function callEth(address payable to,uint amount) external returns(bool) {
         (bool success, ) = to.call{value: amount}("");
