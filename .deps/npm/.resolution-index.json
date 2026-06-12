@@ -168,30 +168,6 @@
       }
     }
   },
-  "solidity基础/错误error.sol": {
-    "__sources__": {
-      "solidity基础/错误error.sol": {
-        "content": "// SPDX-License-Identifier: MIT\r\npragma solidity ^0.8.7;\r\n\r\ncontract ErrorHandle{\r\n    function testRequire(uint number) public pure {\r\n        require(number < 10,\"It's > 10\");\r\n    }\r\n\r\n    function testRevert(uint _n) public pure {\r\n        if(_n > 10){\r\n            revert(\"It's > 10\");\r\n        }\r\n    }\r\n\r\n    //自定义error可以节省gas\r\n    //自定义的error要配合revert关键字使用\r\n    error MyError(address caller,uint i);\r\n\r\n    function testMyError(uint i) public view{\r\n        if(i > 10){\r\n            revert MyError(msg.sender, i);\r\n        }\r\n    }\r\n}",
-        "file": "solidity基础/错误error.sol"
-      }
-    }
-  },
-  "solidity基础/待办列表todoList.sol": {
-    "__sources__": {
-      "solidity基础/待办列表todoList.sol": {
-        "content": "// SPDX-License-Identifier: MIT\r\npragma solidity ^0.8.7;\r\n\r\ncontract ToDoList {\r\n    // 编程作业\r\n    // • 任务：编写一个 Solidity 程序，实现一个简单的待办事项列表。\r\n    // • 要求：\r\n    // a. 定义一个 ToDo 结构体，包含 text （任务描述）和 completed （是否完成）。\r\n    // b. 创建一个 ToDo[] 数组来存储多个任务。\r\n    // c. 实现 create , updateText , 和 toggleCompleted 函数。\r\n    // d. 部署合约到测试网络，并通过界面或命令行测试各个函数的功能。\r\n    struct ToDo {\r\n        string text;\r\n        bool completed;\r\n    }\r\n\r\n    ToDo[] toDoList;\r\n\r\n    function create(string calldata _text) external  {\r\n        toDoList.push(ToDo({\r\n            text: _text,\r\n            completed: false\r\n        }));\r\n    }\r\n\r\n    function updateText(uint index, string calldata newText) external {\r\n        toDoList[index].text = newText;\r\n\r\n        // ToDo storage todo = toDoList[index];\r\n        // todo.text = newText;  这种方式在更新多个字段时更节省gas\r\n    }\r\n\r\n    function toggleCompleted(uint index) external {\r\n        toDoList[index].completed = !toDoList[index].completed;\r\n    }\r\n\r\n    function get(uint index) external view returns (ToDo memory){\r\n        return toDoList[index];\r\n    }\r\n}",
-        "file": "solidity基础/待办列表todoList.sol"
-      }
-    }
-  },
-  "solidity基础/构造函数constructor.sol": {
-    "__sources__": {
-      "solidity基础/构造函数constructor.sol": {
-        "content": "// SPDX-License-Identifier: MIT\r\npragma solidity ^0.8.7;\r\n\r\ncontract Constructor{\r\n    address public owner;\r\n    uint public number;\r\n\r\n    //部署合约时调用\r\n    constructor(uint _number){\r\n        owner = msg.sender;\r\n        number = _number;\r\n    } \r\n}",
-        "file": "solidity基础/构造函数constructor.sol"
-      }
-    }
-  },
   "solidity基础/函数输出和调用.sol": {
     "__sources__": {
       "solidity基础/函数输出和调用.sol": {
@@ -216,14 +192,6 @@
       }
     }
   },
-  "solidity基础/调用父函数super.sol": {
-    "__sources__": {
-      "solidity基础/调用父函数super.sol": {
-        "content": "// SPDX-License-Identifier: MIT\r\npragma solidity ^0.8.7;\r\n\r\n\r\n// 任务描述： 请编写一个 Solidity 合约，其中包含一个基础合约和两个继承该基础合约的子合约，再创建一个继承自这两个子合约的合约。在这个合约中：\r\n// 1. 使用直接调用的方式调用父合约的一个函数。\r\n// 2. 使用 super 关键字调用父合约的另一个函数。\r\n// 要求：\r\n// • 基础合约应包含两个函数，并使用事件记录日志。\r\n// • 子合约应覆盖基础合约中的函数。\r\n// • 复合继承合约应调用子合约中的函数，并演示直接调用和使用 super 的区别。\r\ncontract Base {\r\n    event Log(string message);\r\n\r\n    function foo() public virtual {\r\n        emit Log(\"Base foo\");\r\n    }\r\n\r\n    function bar() public virtual {\r\n        emit Log(\"Base bar\");\r\n    }\r\n}\r\n\r\ncontract A is Base{\r\n    function foo() public virtual override {\r\n        emit Log(\"A foo\");\r\n        Base.foo();\r\n    }\r\n\r\n    function bar() public virtual override {\r\n        emit Log(\"A bar\");\r\n        super.bar();\r\n    }\r\n}\r\n\r\ncontract B is Base{\r\n    function foo() public virtual override {\r\n        emit Log(\"B foo\");\r\n        Base.foo();\r\n    }\r\n\r\n    function bar() public virtual override {\r\n        emit Log(\"B bar\");\r\n        super.bar();\r\n    }\r\n}\r\n\r\ncontract H is A, B{\r\n     function foo() public virtual override(A,B) {\r\n        emit Log(\"H foo\");\r\n        B.foo();\r\n    }\r\n\r\n    function bar() public virtual override(A,B) {\r\n        emit Log(\"H bar\");\r\n        super.bar();// 由于继承了两个合约，所以会依次调用B和A的bar函数\r\n    }\r\n}",
-        "file": "solidity基础/调用父函数super.sol"
-      }
-    }
-  },
   "solidity基础/可见性修饰符.sol": {
     "__sources__": {
       "solidity基础/可见性修饰符.sol": {
@@ -237,14 +205,6 @@
       "solidity基础/支付payable.sol": {
         "content": "// SPDX-License-Identifier: MIT\r\npragma solidity ^0.8.7;\r\n\r\ncontract Payable {\r\n    // 编程作业\r\n    // 1. 定义一个 payable 函数 receiveEther ，用于接收以太币。\r\n    // 2. 创建一个 payable 地址 recipient ，并在构造函数中初始化为 msg.sender 。\r\n    // 3. 编写一个函数 queryBalance ，返回合约当前的以太币余额。\r\n    // 4. 确保在未使用 payable 关键字时，合约无法接收以太币，并记录错误日志。\r\n    address payable public recipient;\r\n\r\n    constructor(){\r\n        recipient = payable(msg.sender);\r\n    }\r\n\r\n    function receiveEther() external payable  {}\r\n\r\n    function queryBalance() external view returns(uint){\r\n        return address(this).balance;\r\n    }\r\n}",
         "file": "solidity基础/支付payable.sol"
-      }
-    }
-  },
-  "solidity基础/关键字.sol": {
-    "__sources__": {
-      "solidity基础/关键字.sol": {
-        "content": "// SPDX-License-Identifier: MIT\r\npragma solidity ^0.8.20;\r\n\r\ncontract HelloWorld {\r\n    uint256 a = 101;\r\n    bytes32 str = \"Hello\";\r\n    string strVar = \"Hello World\";\r\n    // internal：当前合约和子合约可调用  external：外部合约和外部账户调用\r\n    // view：只读取变量  pure：纯运算\r\n    // returs() 声明返回值类型\r\n    // private  public\r\n    /*\r\n    storage  链上永久存储\r\n    memory   内存临时存储\r\n    calldata 存外部只读数据\r\n    */\r\n    function sayHello() public view returns(string memory){\r\n        return strVar;\r\n    }   \r\n\r\n    function setHello(string memory newStr) public {\r\n        strVar = newStr;\r\n    }\r\n\r\n\r\n   function addInfo(string memory helloStr) internal pure returns(string memory) {\r\n    return string.concat(helloStr,\"from Wu's contract\");\r\n   }\r\n}",
-        "file": "solidity基础/关键字.sol"
       }
     }
   },
@@ -331,14 +291,6 @@
   "solidity金融和支付/发送以太币.sol": {
     "__sources__": {}
   },
-  "solidity金融和支付/接收receive和回退fallback.sol": {
-    "__sources__": {
-      "solidity金融和支付/接收receive和回退fallback.sol": {
-        "content": "// SPDX-License-Identifier: MIT\r\npragma solidity ^0.8.7;\r\n\r\n// • Fallback函数的执行条件\r\n// ◦ 当调用的函数不存在且 msg.data 不为空时执行\r\n// • Receive函数的执行条件\r\n// ◦ 当 msg.data 为空时执行\r\ncontract Fallback {\r\n    // 作业内容：编写一个包含Fallback和Receive函数的Solidity合约，并测试其行为。\r\n    // 要求：\r\n    // 1. 定义一个可以接收Ether的合约，包含Fallback和Receive函数。\r\n    // 2. Fallback函数应记录调用者地址、发送的金额和数据。\r\n    // 3. Receive函数应记录调用者地址和发送的金额。\r\n    // 4. 部署合约并测试：\r\n    // ◦ 发送带数据的Ether，验证Fallback函数被调用。\r\n    // ◦ 发送不带数据的Ether，验证Receive函数被调用。\r\n    // ◦ 删除Receive函数，再次发送不带数据的Ether，验证Fallback函数被调用。\r\n\r\n    event Log(string func,address sender,uint amount,bytes data);\r\n\r\n    fallback() external payable { \r\n        emit Log(\"fallback\",msg.sender, msg.value, msg.data);\r\n    }\r\n\r\n    receive() external payable {\r\n        emit Log(\"receive\",msg.sender, msg.value, \"\");\r\n    }\r\n}",
-        "file": "solidity金融和支付/接收receive和回退fallback.sol"
-      }
-    }
-  },
   "solidity金融和支付/支付payable.sol": {
     "__sources__": {
       "solidity金融和支付/支付payable.sol": {
@@ -355,14 +307,6 @@
       }
     }
   },
-  "solidity基础/事件Event.sol": {
-    "__sources__": {
-      "solidity基础/事件Event.sol": {
-        "content": "// SPDX-License-Identifier: MIT\r\npragma solidity ^0.8.7;\r\n\r\n\r\n// 事件的定义和用途\r\n// • 事件在区块链上写入数据。\r\n// • 数据无法被智能合约检索。\r\n// • 事件的主要目的是记录某些事情发生的日志。\r\n// • 作为存储数据的状态变量的廉价替代方案。\r\ncontract Event {\r\n    // 使用 index 关键字为事件参数创建索引\r\n    // 通过索引快速搜索事件日志\r\n\r\n\r\n    // 请按照以下要求编写一个 Solidity 智能合约，完成练习：\r\n    // 1. 声明事件：\r\n    // ◦ 声明一个名为LogMessage的事件，包含以下参数：\r\n    // ▪ 发送者地址（ address ，使用 indexed 关键字）\r\n    // ▪ 接收者地址（ address ，使用 indexed 关键字）\r\n    // ▪ 消息内容（ string ）\r\n    // 2. 创建发送消息的函数：创建一个名为sendMessage的函数，该函数包含两个参数：\r\n    // ▪ 接收者地址（ address ）\r\n    // ▪ 消息内容（ string ）\r\n    // ◦ 在函数内部，使用 emit 记录 LogMessage 事件，将发送者地址设为 msg.sender ，接收者地址设为函数参数，消息内容设为函数参数。\r\n    event LogMessage(address indexed from,address indexed to,string  message);\r\n\r\n    function send(address to,string memory text) external {\r\n        emit LogMessage(msg.sender, to, text);\r\n    }\r\n}",
-        "file": "solidity基础/事件Event.sol"
-      }
-    }
-  },
   "solidity金融和支付/简易钱包.sol": {
     "__sources__": {
       "solidity金融和支付/简易钱包.sol": {
@@ -376,14 +320,6 @@
       "solidity基础/结构体struct.sol": {
         "content": "// SPDX-License-Identifier: MIT\r\npragma solidity ^0.8.7;\r\n\r\ncontract StructContract {\r\n    // 编程作业： \r\n    // 创建一个Solidity智能合约，包含一个名为 Car 的struct，具有以下属性： make\r\n    // (制造商，字符串类型)， year (生产年份，整数类型)，和 owner (所有者，地址类型)。合约应允许\r\n    // 用户：\r\n    // • 添加新的车辆到数组中。\r\n    // • 访问和修改特定车辆的年份。\r\n    // • 删除车辆记录。\r\n    struct Car{\r\n        string make;\r\n        uint year;\r\n        address owner;\r\n    }\r\n\r\n    Car[] public cars;\r\n\r\n    function init() external  {\r\n        Car memory toyota = Car(\"Toyota\", 2000, msg.sender);\r\n        cars.push(toyota);\r\n        Car memory bmw = Car({make:\"BMW\",owner: msg.sender, year:1990});\r\n        cars.push(bmw);\r\n        Car memory tesla;\r\n        tesla.make = \"Tesla\";\r\n        cars.push(tesla);\r\n\r\n        cars.push(Car(\"xiaomi\",2024,msg.sender));\r\n\r\n        Car storage car = cars[0];\r\n        car.year = 1999;\r\n        delete car.owner;\r\n    }\r\n\r\n    function modify(uint index,uint newYear) external {\r\n        cars[index].year = newYear;\r\n    }\r\n\r\n    function addCar(string memory maker,uint year) external {\r\n        Car memory newCar = Car(maker,year,msg.sender);\r\n        cars.push(newCar);\r\n    }\r\n\r\n    function delCar(uint index) external {\r\n        delete cars[index];\r\n    } \r\n}",
         "file": "solidity基础/结构体struct.sol"
-      }
-    }
-  },
-  "solidity基础/循环.sol": {
-    "__sources__": {
-      "solidity基础/循环.sol": {
-        "content": "// SPDX-License-Identifier: MIT\r\npragma solidity ^0.8.7;\r\n\r\ncontract IfElse{\r\n    function example (uint _x) public pure returns (uint) {\r\n        if(_x < 10){\r\n            return 1;\r\n        }else if(_x < 20){\r\n            return 2;\r\n        }else{\r\n            return 3;\r\n        }\r\n    }\r\n\r\n    function tenary (uint _x) public pure returns (uint) {\r\n        return _x < 10 ? 1 : 2;\r\n    }\r\n}\r\n\r\ncontract ForWhileLoop{\r\n    function loop() external pure {\r\n        for(uint i = 0;i < 10;i++){\r\n            if(i == 3){\r\n                continue ;\r\n            }\r\n            if(i == 5){\r\n                break ;\r\n            }\r\n        }\r\n        uint j = 10;\r\n        while (j < 10){\r\n            j++;\r\n        }\r\n    }\r\n\r\n    function sum(uint number) external pure returns(uint){\r\n        uint total;\r\n        for(uint i = 0;i <= number;i++){\r\n            total += i;\r\n        }\r\n        return total;\r\n    }\r\n}",
-        "file": "solidity基础/循环.sol"
       }
     }
   },
@@ -414,14 +350,6 @@
   "solidity合约交互/library.sol": {
     "__sources__": {}
   },
-  "solidity基础/常量constant和immutable.sol": {
-    "__sources__": {
-      "solidity基础/常量constant和immutable.sol": {
-        "content": "// SPDX-License-Identifier: MIT\r\npragma solidity ^0.8.7;\r\n\r\n// 常量可以节省gas\r\n// constant：必须在声明时赋值，不能使用运行时值‌（如 msg.sender、block.timestamp）\r\n// immutable：可以在构造函数中赋值一次，允许运行时值‌（如msg.sender、block.number）\r\ncontract Constant {\r\n    // 作业内容\r\n    // 1. 编写一个Solidity合约，包含以下要求：\r\n    // ◦ 定义一个名为 owner 的状态变量，并使用 immutable 关键字。\r\n    // ◦ 在合约的构造函数中将 owner 初始化为 msg.sender 。\r\n    // ◦ 编写一个函数 getOwner ，返回 owner 的值。\r\n    // 2. 编译并部署合约。\r\n    // 3. 调用 getOwner 函数，验证合约部署时 owner 的值正确性。\r\n    address public constant MY_ADDR = 0xf8e81D47203A594245E36C48e151709F0C19fBe8;//373 gas\r\n    uint public constant MY_UINT = 123;\r\n\r\n    address public immutable owner;\r\n\r\n    constructor(){\r\n        owner = msg.sender;\r\n    }\r\n\r\n    function getOwner() public view returns (address){\r\n        return owner;\r\n    }\r\n}",
-        "file": "solidity基础/常量constant和immutable.sol"
-      }
-    }
-  },
   "solidity基础/数据存储位置storage、memory、calldata.sol": {
     "__sources__": {
       "solidity基础/数据存储位置storage、memory、calldata.sol": {
@@ -446,14 +374,6 @@
       }
     }
   },
-  "solidity合约交互/创建新合约new.sol": {
-    "__sources__": {
-      "solidity合约交互/创建新合约new.sol": {
-        "content": "// SPDX-License-Identifier: MIT\r\npragma solidity ^0.8.7;\r\n\r\n// 1. 声明合约：\r\n// ◦ 编写一个名为 Account 的合约，包含一个 owner 地址类型的状态变量，构造函数接收owner 参数并初始化状态变量。\r\n// ◦ 编写一个名为 AccountFactory 的合约，用于创建 Account 合约。\r\n// 2. 创建合约函数：\r\n// ◦ 在 AccountFactory 合约中，创建一个名为 createAccount 的函数。\r\n// ◦ 函数参数包括一个地址 owner ，将其传递给 Account 合约的构造函数。\r\n// ◦ 使用 new 关键字创建 Account 合约实例。\r\n// ◦ 将新创建的 Account 实例添加到 accounts 数组中。\r\n// ◦ 确保 createAccount 函数是 payable ，并在创建合约时发送以太币。\r\n// 3. 部署和测试：\r\n// ◦ 部署 AccountFactory 合约并调用 createAccount 函数，传递 owner 地址和一些以太币。\r\n// ◦ 验证新创建的 Account 合约地址和所有者是否正确。\r\n\r\ncontract Account {\r\n    address creater;\r\n    address owner;\r\n    \r\n    constructor(address _owner) payable {\r\n        creater = msg.sender;\r\n        owner = _owner;\r\n    }\r\n}\r\n\r\ncontract AccountFactory {\r\n    Account[] public accounts;\r\n    function createAccount(address _owner) external payable  {\r\n       Account account =  new Account{value: 123}(_owner);\r\n       accounts.push(account);\r\n    }\r\n}",
-        "file": "solidity合约交互/创建新合约new.sol"
-      }
-    }
-  },
   "solidity基础/基础.sol": {
     "__sources__": {
       "solidity基础/基础.sol": {
@@ -475,14 +395,6 @@
       "签名和验证/keccak256哈希.sol": {
         "content": "// SPDX-License-Identifier: MIT\r\npragma solidity ^0.8.7;\r\n\r\n// Keccak256的常见用例：签名、生成唯一ID、防止抢跑（Commit-Reveal机制）\r\n// abi.encode 和 abi.encodePacked 的区别： \r\n// abi.encode 保留更多信息，abi.encodePacked 压缩数据\r\n// 避免哈希冲突：通过添加一个额外的整数参数，改变输入顺序，避免哈希冲突\r\n\r\n\r\n// 创建一个名为 MyHash 的合约，其中包含以下功能：\r\n// ◦ 函数 hashFunction ：接受字符串 text 、整数 num 和地址 addr 作为参数，返回这些参数的Keccak256哈希值。\r\n// ◦ 函数 encodeFunction ：接受两个字符串 text0 和 text1 ，使用abi.encode 编码并返回结果。\r\n// ◦ 函数 encodePackedFunction ：接受两个字符串 text0 和 text1 ，使用abi.encodePacked 编码并返回结果。\r\n// ◦ 函数 collisionFunction ：接受两个字符串 text0 和 text1 ，使用abi.encodePacked 编码并返回Keccak256哈希值。\r\ncontract MyHash {\r\n    function hashFunction(string memory text,uint num,address addr) external pure returns(bytes32){\r\n       return keccak256(abi.encodePacked(text,num,addr));\r\n    }\r\n\r\n    function encodeFunction(string memory text0,string memory text1) external pure returns(bytes memory) {\r\n        return abi.encode(text0, text1);\r\n    }\r\n\r\n    function encodePackedFunction(string memory text0,string memory text1) external pure returns(bytes memory){\r\n        return abi.encodePacked(text0,text1);\r\n    }\r\n\r\n    function collisionFunction(string memory text0,uint num,string memory text1) external pure returns(bytes memory){\r\n        return abi.encodePacked(text0, num, text1);\r\n    }\r\n}",
         "file": "签名和验证/keccak256哈希.sol"
-      }
-    }
-  },
-  "solidity基础/数组.sol": {
-    "__sources__": {
-      "solidity基础/数组.sol": {
-        "content": "// SPDX-License-Identifier: MIT\r\npragma solidity ^0.8.0;\r\n\r\ncontract array{\r\n    uint[] public nums = [1, 2, 3];\r\n    uint[3] public fixedNums = [4, 5, 6];\r\n    uint[] public numArr = [1,2,3];\r\n\r\n    function example() public {\r\n        nums.push(4);// [1,2,3,4]\r\n        nums[2] = 888;// [1,2,888,4]\r\n        delete nums[1];// [1,0,888,4]\r\n        nums.pop();// [1,0,888]\r\n\r\n        uint[] memory arr = new uint[](5) ;// 临时创建数组\r\n        arr[1] = 22;\r\n    }\r\n    \r\n    function getLength() public view returns (uint){\r\n        return nums.length;\r\n    }\r\n\r\n     // 通过平移算法删除数组中的元素（效率低，消耗gas多）\r\n    function removeEle(uint[] memory newArr, uint index) public returns (uint[] memory){\r\n        require(index < newArr.length, \"index out of bound\");\r\n        numArr = newArr;\r\n        for (uint i = index;i < numArr.length - 1;i++) {\r\n            numArr[i]= numArr[i+1];\r\n        }\r\n        numArr.pop();\r\n        return numArr;\r\n    }\r\n}",
-        "file": "solidity基础/数组.sol"
       }
     }
   },
@@ -534,11 +446,59 @@
       }
     }
   },
-  "solidity基础/所有者调用onlyOwner.sol": {
+  "solidity基础/数组.sol": {
     "__sources__": {
-      "solidity基础/所有者调用onlyOwner.sol": {
-        "content": "// SPDX-License-Identifier: MIT\r\npragma solidity ^0.8.7;\r\n\r\ncontract MyOwnable {\r\n    address public owner;\r\n\r\n    constructor() {\r\n        owner = msg.sender;\r\n    }\r\n\r\n    modifier onlyOwner(){\r\n        require(msg.sender == owner, \"Only owner can call this function\");\r\n        _;\r\n    }\r\n\r\n    function transferOwnership(address newOwner) external onlyOwner {\r\n        require(newOwner != address(0), \"invalid address\");\r\n        owner = newOwner;\r\n    }\r\n\r\n    function onlyOwnerCallThisFunc() external onlyOwner {\r\n        //code\r\n    }\r\n\r\n    function anyoneCallThisFunc() external {\r\n        //code\r\n    }\r\n}",
-        "file": "solidity基础/所有者调用onlyOwner.sol"
+      "solidity基础/数组.sol": {
+        "content": "// SPDX-License-Identifier: MIT\r\npragma solidity ^0.8.0;\r\n\r\ncontract array{\r\n    uint[] public nums = [1, 2, 3];\r\n    uint[3] public fixedNums = [4, 5, 6];\r\n    uint[] public numArr = [1,2,3];\r\n\r\n    function example() public {\r\n        nums.push(4);// [1,2,3,4]\r\n        nums[2] = 888;// [1,2,888,4]\r\n        delete nums[1];// [1,0,888,4]\r\n        nums.pop();// [1,0,888]\r\n\r\n        uint[] memory arr = new uint[](5) ;// 临时创建数组\r\n        arr[1] = 22;\r\n    }\r\n    \r\n    function getLength() public view returns (uint){\r\n        return nums.length;\r\n    }\r\n\r\n     // 通过平移算法删除数组中的元素（效率低，消耗gas多）\r\n    function removeEle(uint[] memory newArr, uint index) public returns (uint[] memory){\r\n        require(index < newArr.length, \"index out of bound\");\r\n        numArr = newArr;\r\n        for (uint i = index;i < numArr.length - 1;i++) {\r\n            numArr[i]= numArr[i+1];\r\n        }\r\n        numArr.pop();\r\n        return numArr;\r\n    }\r\n}",
+        "file": "solidity基础/数组.sol"
+      }
+    }
+  },
+  "solidity基础/事件Event.sol": {
+    "__sources__": {
+      "solidity基础/事件Event.sol": {
+        "content": "// SPDX-License-Identifier: MIT\r\npragma solidity ^0.8.7;\r\n\r\n\r\n// 事件的定义和用途\r\n// • 事件在区块链上写入数据。\r\n// • 数据无法被智能合约检索。\r\n// • 事件的主要目的是记录某些事情发生的日志。\r\n// • 作为存储数据的状态变量的廉价替代方案。\r\ncontract Event {\r\n    // 使用 index 关键字为事件参数创建索引\r\n    // 通过索引快速搜索事件日志\r\n\r\n\r\n    // 请按照以下要求编写一个 Solidity 智能合约，完成练习：\r\n    // 1. 声明事件：\r\n    // ◦ 声明一个名为LogMessage的事件，包含以下参数：\r\n    // ▪ 发送者地址（ address ，使用 indexed 关键字）\r\n    // ▪ 接收者地址（ address ，使用 indexed 关键字）\r\n    // ▪ 消息内容（ string ）\r\n    // 2. 创建发送消息的函数：创建一个名为sendMessage的函数，该函数包含两个参数：\r\n    // ▪ 接收者地址（ address ）\r\n    // ▪ 消息内容（ string ）\r\n    // ◦ 在函数内部，使用 emit 记录 LogMessage 事件，将发送者地址设为 msg.sender ，接收者地址设为函数参数，消息内容设为函数参数。\r\n    event LogMessage(address indexed from,address indexed to,string  message);\r\n\r\n    function send(address to,string memory text) external {\r\n        emit LogMessage(msg.sender, to, text);\r\n    }\r\n}",
+        "file": "solidity基础/事件Event.sol"
+      }
+    }
+  },
+  "solidity金融和支付/接收receive和回退fallback.sol": {
+    "__sources__": {
+      "solidity金融和支付/接收receive和回退fallback.sol": {
+        "content": "// SPDX-License-Identifier: MIT\r\npragma solidity ^0.8.7;\r\n\r\n// • Fallback函数的执行条件\r\n// ◦ 当调用的函数不存在且 msg.data 不为空时执行\r\n// • Receive函数的执行条件\r\n// ◦ 当 msg.data 为空时执行\r\ncontract Fallback {\r\n    // 作业内容：编写一个包含Fallback和Receive函数的Solidity合约，并测试其行为。\r\n    // 要求：\r\n    // 1. 定义一个可以接收Ether的合约，包含Fallback和Receive函数。\r\n    // 2. Fallback函数应记录调用者地址、发送的金额和数据。\r\n    // 3. Receive函数应记录调用者地址和发送的金额。\r\n    // 4. 部署合约并测试：\r\n    // ◦ 发送带数据的Ether，验证Fallback函数被调用。\r\n    // ◦ 发送不带数据的Ether，验证Receive函数被调用。\r\n    // ◦ 删除Receive函数，再次发送不带数据的Ether，验证Fallback函数被调用。\r\n\r\n    event Log(string func,address sender,uint amount,bytes data);\r\n\r\n    fallback() external payable { \r\n        emit Log(\"fallback\",msg.sender, msg.value, msg.data);\r\n    }\r\n\r\n    receive() external payable {\r\n        emit Log(\"receive\",msg.sender, msg.value, \"\");\r\n    }\r\n}",
+        "file": "solidity金融和支付/接收receive和回退fallback.sol"
+      }
+    }
+  },
+  "solidity合约交互/创建新合约new.sol": {
+    "__sources__": {
+      "solidity合约交互/创建新合约new.sol": {
+        "content": "// SPDX-License-Identifier: MIT\r\npragma solidity ^0.8.7;\r\n\r\n// 1. 声明合约：\r\n// ◦ 编写一个名为 Account 的合约，包含一个 owner 地址类型的状态变量，构造函数接收owner 参数并初始化状态变量。\r\n// ◦ 编写一个名为 AccountFactory 的合约，用于创建 Account 合约。\r\n// 2. 创建合约函数：\r\n// ◦ 在 AccountFactory 合约中，创建一个名为 createAccount 的函数。\r\n// ◦ 函数参数包括一个地址 owner ，将其传递给 Account 合约的构造函数。\r\n// ◦ 使用 new 关键字创建 Account 合约实例。\r\n// ◦ 将新创建的 Account 实例添加到 accounts 数组中。\r\n// ◦ 确保 createAccount 函数是 payable ，并在创建合约时发送以太币。\r\n// 3. 部署和测试：\r\n// ◦ 部署 AccountFactory 合约并调用 createAccount 函数，传递 owner 地址和一些以太币。\r\n// ◦ 验证新创建的 Account 合约地址和所有者是否正确。\r\n\r\ncontract Account {\r\n    address creater;\r\n    address owner;\r\n    \r\n    constructor(address _owner) payable {\r\n        creater = msg.sender;\r\n        owner = _owner;\r\n    }\r\n}\r\n\r\ncontract AccountFactory {\r\n    Account[] public accounts;\r\n    function createAccount(address _owner) external payable  {\r\n       Account account =  new Account{value: 123}(_owner);\r\n       accounts.push(account);\r\n    }\r\n}",
+        "file": "solidity合约交互/创建新合约new.sol"
+      }
+    }
+  },
+  "solidity基础/错误error.sol": {
+    "__sources__": {
+      "solidity基础/错误error.sol": {
+        "content": "// SPDX-License-Identifier: MIT\r\npragma solidity ^0.8.7;\r\n\r\ncontract ErrorHandle{\r\n    function testRequire(uint number) public pure {\r\n        require(number < 10,\"It's > 10\");\r\n    }\r\n\r\n    function testRevert(uint _n) public pure {\r\n        if(_n > 10){\r\n            revert(\"It's > 10\");\r\n        }\r\n    }\r\n\r\n    //自定义error可以节省gas\r\n    //自定义的error要配合revert关键字使用\r\n    error MyError(address caller,uint i);\r\n\r\n    function testMyError(uint i) public view{\r\n        if(i > 10){\r\n            revert MyError(msg.sender, i);\r\n        }\r\n    }\r\n}",
+        "file": "solidity基础/错误error.sol"
+      }
+    }
+  },
+  "solidity基础/调用父函数super.sol": {
+    "__sources__": {
+      "solidity基础/调用父函数super.sol": {
+        "content": "// SPDX-License-Identifier: MIT\r\npragma solidity ^0.8.7;\r\n\r\n\r\n// 任务描述： 请编写一个 Solidity 合约，其中包含一个基础合约和两个继承该基础合约的子合约，再创建一个继承自这两个子合约的合约。在这个合约中：\r\n// 1. 使用直接调用的方式调用父合约的一个函数。\r\n// 2. 使用 super 关键字调用父合约的另一个函数。\r\n// 要求：\r\n// • 基础合约应包含两个函数，并使用事件记录日志。\r\n// • 子合约应覆盖基础合约中的函数。\r\n// • 复合继承合约应调用子合约中的函数，并演示直接调用和使用 super 的区别。\r\ncontract Base {\r\n    event Log(string message);\r\n\r\n    function foo() public virtual {\r\n        emit Log(\"Base foo\");\r\n    }\r\n\r\n    function bar() public virtual {\r\n        emit Log(\"Base bar\");\r\n    }\r\n}\r\n\r\ncontract A is Base{\r\n    function foo() public virtual override {\r\n        emit Log(\"A foo\");\r\n        Base.foo();\r\n    }\r\n\r\n    function bar() public virtual override {\r\n        emit Log(\"A bar\");\r\n        super.bar();\r\n    }\r\n}\r\n\r\ncontract B is Base{\r\n    function foo() public virtual override {\r\n        emit Log(\"B foo\");\r\n        Base.foo();\r\n    }\r\n\r\n    function bar() public virtual override {\r\n        emit Log(\"B bar\");\r\n        super.bar();\r\n    }\r\n}\r\n\r\ncontract H is A, B{\r\n     function foo() public virtual override(A,B) {\r\n        emit Log(\"H foo\");\r\n        B.foo();\r\n    }\r\n\r\n    function bar() public virtual override(A,B) {\r\n        emit Log(\"H bar\");\r\n        super.bar();// 由于继承了两个合约，所以会依次调用B和A的bar函数\r\n    }\r\n}",
+        "file": "solidity基础/调用父函数super.sol"
+      }
+    }
+  },
+  "solidity基础/构造函数constructor.sol": {
+    "__sources__": {
+      "solidity基础/构造函数constructor.sol": {
+        "content": "// SPDX-License-Identifier: MIT\r\npragma solidity ^0.8.7;\r\n\r\ncontract Constructor{\r\n    address public owner;\r\n    uint public number;\r\n\r\n    //部署合约时调用\r\n    constructor(uint _number){\r\n        owner = msg.sender;\r\n        number = _number;\r\n    } \r\n}",
+        "file": "solidity基础/构造函数constructor.sol"
       }
     }
   },
@@ -547,6 +507,54 @@
       "solidity金融和支付/发送以太币transfer、send、call.sol": {
         "content": "// SPDX-License-Identifier: MIT\r\npragma solidity ^0.8.7;\r\n\r\n// 三种发送ETH的方法:\r\n// ◦ transfer 发送2300 gas。\r\n// ▪ 如果发送失败，整个函数会失败。\r\n// ◦ send 发送2300 gas。\r\n// ▪ 返回一个布尔值，指示发送是否成功。\r\n// ◦ call 转发所有gas。\r\n// ▪ 返回两个值：一个布尔值指示调用是否成功，一个数据值。\r\n contract Sender {\r\n    // 编写一个Solidity智能合约，包含以下功能：\r\n    // 1. 能够接收ETH（使用 receive 函数）。\r\n    // 2. 能够使用 transfer 方法发送ETH。\r\n    // 3. 能够使用 send 方法发送ETH并处理失败情况。\r\n    // 4. 能够使用 call 方法发送ETH并处理返回值。\r\n\r\n    \r\n    constructor() payable {} // 部署合约时接受以太币\r\n\r\n    // function transferEth(address payable  to, uint amount) external {\r\n    //     to.transfer(amount);\r\n    // }\r\n\r\n    //  function sendEth(address payable  to, uint amount) external {\r\n    //    bool success =  to.send(amount);\r\n    //    require(success, \"send failed\");\r\n    // }\r\n\r\n    function callEth(address payable to,uint amount) external returns(bool) {\r\n        (bool success, ) = to.call{value: amount}(\"\");\r\n        require(success, \"Call failed\");\r\n        return success;\r\n\r\n    }\r\n}\r\n\r\ncontract Receiver {\r\n    event Log(uint amount, uint gas);\r\n\r\n    receive() external payable { \r\n        emit Log(msg.value,gasleft());\r\n    }\r\n}",
         "file": "solidity金融和支付/发送以太币transfer、send、call.sol"
+      }
+    }
+  },
+  "solidity基础/常量constant和immutable.sol": {
+    "__sources__": {
+      "solidity基础/常量constant和immutable.sol": {
+        "content": "// SPDX-License-Identifier: MIT\r\npragma solidity ^0.8.7;\r\n\r\n// 常量可以节省gas\r\n// constant：必须在声明时赋值，不能使用运行时值‌（如 msg.sender、block.timestamp）\r\n// immutable：可以在构造函数中赋值一次，允许运行时值‌（如msg.sender、block.number）\r\ncontract Constant {\r\n    // 作业内容\r\n    // 1. 编写一个Solidity合约，包含以下要求：\r\n    // ◦ 定义一个名为 owner 的状态变量，并使用 immutable 关键字。\r\n    // ◦ 在合约的构造函数中将 owner 初始化为 msg.sender 。\r\n    // ◦ 编写一个函数 getOwner ，返回 owner 的值。\r\n    // 2. 编译并部署合约。\r\n    // 3. 调用 getOwner 函数，验证合约部署时 owner 的值正确性。\r\n    address public constant MY_ADDR = 0xf8e81D47203A594245E36C48e151709F0C19fBe8;//373 gas\r\n    uint public constant MY_UINT = 123;\r\n\r\n    address public immutable owner;\r\n\r\n    constructor(){\r\n        owner = msg.sender;\r\n    }\r\n\r\n    function getOwner() public view returns (address){\r\n        return owner;\r\n    }\r\n}",
+        "file": "solidity基础/常量constant和immutable.sol"
+      }
+    }
+  },
+  "solidity基础/待办列表todoList.sol": {
+    "__sources__": {
+      "solidity基础/待办列表todoList.sol": {
+        "content": "// SPDX-License-Identifier: MIT\r\npragma solidity ^0.8.7;\r\n\r\ncontract ToDoList {\r\n    // 编程作业\r\n    // • 任务：编写一个 Solidity 程序，实现一个简单的待办事项列表。\r\n    // • 要求：\r\n    // a. 定义一个 ToDo 结构体，包含 text （任务描述）和 completed （是否完成）。\r\n    // b. 创建一个 ToDo[] 数组来存储多个任务。\r\n    // c. 实现 create , updateText , 和 toggleCompleted 函数。\r\n    // d. 部署合约到测试网络，并通过界面或命令行测试各个函数的功能。\r\n    struct ToDo {\r\n        string text;\r\n        bool completed;\r\n    }\r\n\r\n    ToDo[] toDoList;\r\n\r\n    function create(string calldata _text) external  {\r\n        toDoList.push(ToDo({\r\n            text: _text,\r\n            completed: false\r\n        }));\r\n    }\r\n\r\n    function updateText(uint index, string calldata newText) external {\r\n        toDoList[index].text = newText;\r\n\r\n        // ToDo storage todo = toDoList[index];\r\n        // todo.text = newText;  这种方式在更新多个字段时更节省gas\r\n    }\r\n\r\n    function toggleCompleted(uint index) external {\r\n        toDoList[index].completed = !toDoList[index].completed;\r\n    }\r\n\r\n    function get(uint index) external view returns (ToDo memory){\r\n        return toDoList[index];\r\n    }\r\n}",
+        "file": "solidity基础/待办列表todoList.sol"
+      }
+    }
+  },
+  "solidity基础/循环.sol": {
+    "__sources__": {
+      "solidity基础/循环.sol": {
+        "content": "// SPDX-License-Identifier: MIT\r\npragma solidity ^0.8.7;\r\n\r\ncontract IfElse{\r\n    function example (uint _x) public pure returns (uint) {\r\n        if(_x < 10){\r\n            return 1;\r\n        }else if(_x < 20){\r\n            return 2;\r\n        }else{\r\n            return 3;\r\n        }\r\n    }\r\n\r\n    function tenary (uint _x) public pure returns (uint) {\r\n        return _x < 10 ? 1 : 2;\r\n    }\r\n}\r\n\r\ncontract ForWhileLoop{\r\n    function loop() external pure {\r\n        for(uint i = 0;i < 10;i++){\r\n            if(i == 3){\r\n                continue ;\r\n            }\r\n            if(i == 5){\r\n                break ;\r\n            }\r\n        }\r\n        uint j = 10;\r\n        while (j < 10){\r\n            j++;\r\n        }\r\n    }\r\n\r\n    function sum(uint number) external pure returns(uint){\r\n        uint total;\r\n        for(uint i = 0;i <= number;i++){\r\n            total += i;\r\n        }\r\n        return total;\r\n    }\r\n}",
+        "file": "solidity基础/循环.sol"
+      }
+    }
+  },
+  "solidity基础/所有者调用onlyOwner.sol": {
+    "__sources__": {
+      "solidity基础/所有者调用onlyOwner.sol": {
+        "content": "// SPDX-License-Identifier: MIT\r\npragma solidity ^0.8.7;\r\n\r\ncontract MyOwnable {\r\n    address public owner;\r\n\r\n    constructor() {\r\n        owner = msg.sender;\r\n    }\r\n\r\n    modifier onlyOwner(){\r\n        require(msg.sender == owner, \"Only owner can call this function\");\r\n        _;\r\n    }\r\n\r\n    function transferOwnership(address newOwner) external onlyOwner {\r\n        require(newOwner != address(0), \"invalid address\");\r\n        owner = newOwner;\r\n    }\r\n\r\n    function onlyOwnerCallThisFunc() external onlyOwner {\r\n        //code\r\n    }\r\n\r\n    function anyoneCallThisFunc() external {\r\n        //code\r\n    }\r\n}",
+        "file": "solidity基础/所有者调用onlyOwner.sol"
+      }
+    }
+  },
+  "solidity基础/关键字.sol": {
+    "__sources__": {
+      "solidity基础/关键字.sol": {
+        "content": "// SPDX-License-Identifier: MIT\r\npragma solidity ^0.8.20;\r\n\r\ncontract HelloWorld {\r\n    uint256 a = 101;\r\n    bytes32 str = \"Hello\";\r\n    string strVar = \"Hello World\";\r\n    // internal：当前合约和子合约可调用  external：外部合约和外部账户调用\r\n    // view：只读取变量  pure：纯运算\r\n    // returs() 声明返回值类型\r\n    // private  public\r\n    /*\r\n    storage  链上永久存储\r\n    memory   内存临时存储\r\n    calldata 存外部只读数据\r\n    */\r\n    function sayHello() public view returns(string memory){\r\n        return strVar;\r\n    }   \r\n\r\n    function setHello(string memory newStr) public {\r\n        strVar = newStr;\r\n    }\r\n\r\n\r\n   function addInfo(string memory helloStr) internal pure returns(string memory) {\r\n    return string.concat(helloStr,\"from Wu's contract\");\r\n   }\r\n}",
+        "file": "solidity基础/关键字.sol"
+      }
+    }
+  },
+  "solidity签名和验证/keccak256哈希函数.sol": {
+    "__sources__": {
+      "solidity签名和验证/keccak256哈希函数.sol": {
+        "content": "// SPDX-License-Identifier: MIT\r\npragma solidity ^0.8.7;\r\n\r\n// Keccak256的常见用例：签名、生成唯一ID、防止抢跑（Commit-Reveal机制）\r\n// abi.encode 和 abi.encodePacked 的区别： \r\n// abi.encode 保留更多信息，abi.encodePacked 压缩数据\r\n// 避免哈希冲突：通过添加一个额外的整数参数，改变输入顺序，避免哈希冲突\r\n\r\n\r\n// 创建一个名为 MyHash 的合约，其中包含以下功能：\r\n// ◦ 函数 hashFunction ：接受字符串 text 、整数 num 和地址 addr 作为参数，返回这些参数的Keccak256哈希值。\r\n// ◦ 函数 encodeFunction ：接受两个字符串 text0 和 text1 ，使用abi.encode 编码并返回结果。\r\n// ◦ 函数 encodePackedFunction ：接受两个字符串 text0 和 text1 ，使用abi.encodePacked 编码并返回结果。\r\n// ◦ 函数 collisionFunction ：接受两个字符串 text0 和 text1 ，使用abi.encodePacked 编码并返回Keccak256哈希值。\r\ncontract MyHash {\r\n    function hashFunction(string memory text,uint num,address addr) external pure returns(bytes32){\r\n       return keccak256(abi.encodePacked(text,num,addr));\r\n    }\r\n\r\n    function encodeFunction(string memory text0,string memory text1) external pure returns(bytes memory) {\r\n        return abi.encode(text0, text1);\r\n    }\r\n\r\n    function encodePackedFunction(string memory text0,string memory text1) external pure returns(bytes memory){\r\n        return abi.encodePacked(text0,text1);\r\n    }\r\n\r\n    function collisionFunction(string memory text0,uint num,string memory text1) external pure returns(bytes memory){\r\n        return abi.encodePacked(text0, num, text1);\r\n    }\r\n}",
+        "file": "solidity签名和验证/keccak256哈希函数.sol"
       }
     }
   },
@@ -561,7 +569,7 @@
   "solidity签名和验证/签名验证.sol": {
     "__sources__": {
       "solidity签名和验证/签名验证.sol": {
-        "content": "// SPDX-License-Identifier: MIT\r\npragma solidity ^0.8.7;\r\n\r\n\r\ncontract SignatureVerify {\r\n    // 1. verify 函数，用于验证签名。\r\n    // 签名由小狐狸生成（Account地址和哈希作为参数）\r\n    function verify(string memory message, bytes memory sign,address signer) external pure returns (bool){\r\n        bytes32 msgHash = getMessageHash(message);\r\n        bytes32 ethSignedMsgHash = getEthSignedMessageHash(msgHash);\r\n        return recover(ethSignedMsgHash, sign) == signer;\r\n    }\r\n\r\n    // 2. getMessageHash 函数，用于生成消息哈希。\r\n    function getMessageHash(string memory message) public  pure returns(bytes32) {\r\n        return keccak256(abi.encodePacked(message));\r\n    }\r\n\r\n    // 3. getEthSignedMessageHash 函数，用于生成Ethereum签名消息哈希。\r\n    function getEthSignedMessageHash(bytes32 messageHash) public pure returns(bytes32) {\r\n        return keccak256(abi.encodePacked(\"\\x19Ethereum Signed Message:\\n32\", messageHash));\r\n    }\r\n\r\n    // 4. recover 函数，用于恢复签名者地址。\r\n    function recover(bytes32 ethSignedMessageHash, bytes memory sign) public  pure returns(address) {\r\n        (bytes32 r,bytes32 s,uint8 v) = splitSignature(sign);\r\n        return ecrecover(ethSignedMessageHash, v, r, s);\r\n    }\r\n\r\n    // 5. splitSignature 函数，用于拆分签名。\r\n    function splitSignature(bytes memory sign) internal pure returns(bytes32 r, bytes32 s, uint8 v) {\r\n        assembly {\r\n            r := mload(add(sign, 32))\r\n            s := mload(add(sign, 64))\r\n            v := byte(0,mload(add(sign, 96)))\r\n        }\r\n    }\r\n}",
+        "content": "// SPDX-License-Identifier: MIT\r\npragma solidity ^0.8.7;\r\n\r\n\r\ncontract SignatureVerify {\r\n    // 1. verify 函数，用于验证签名。\r\n    // 签名由小狐狸生成（Account地址和哈希作为参数）\r\n    function verify(string memory message, bytes memory sign,address signer) external pure returns (bool){\r\n        bytes32 msgHash = getMessageHash(message);\r\n        bytes32 ethSignedMsgHash = getEthSignedMessageHash(msgHash);\r\n        return recover(ethSignedMsgHash, sign) == signer;\r\n    }\r\n\r\n    // 2. getMessageHash 函数，用于生成消息哈希。\r\n    function getMessageHash(string memory message) public  pure returns(bytes32) {\r\n        return keccak256(abi.encodePacked(message));\r\n    }\r\n\r\n    // 3. getEthSignedMessageHash 函数，用于生成Ethereum签名消息哈希。\r\n    function getEthSignedMessageHash(bytes32 messageHash) public pure returns(bytes32) {\r\n        return keccak256(abi.encodePacked(\"\\x19Ethereum Signed Message:\\n32\", messageHash));//二次加工，这个签名表名它不是一个交易签名\r\n    }\r\n\r\n    // 4. recover 函数，用于恢复签名者地址。\r\n    function recover(bytes32 ethSignedMessageHash, bytes memory sign) public  pure returns(address) {\r\n        (bytes32 r,bytes32 s,uint8 v) = splitSignature(sign);\r\n        return ecrecover(ethSignedMessageHash, v, r, s);\r\n    }\r\n\r\n    // 5. splitSignature 函数，用于拆分签名。\r\n    function splitSignature(bytes memory sign) internal pure returns(bytes32 r, bytes32 s, uint8 v) {\r\n        assembly {\r\n            r := mload(add(sign, 32))\r\n            s := mload(add(sign, 64))\r\n            v := byte(0,mload(add(sign, 96)))\r\n        }\r\n    }\r\n}",
         "file": "solidity签名和验证/签名验证.sol"
       }
     }
