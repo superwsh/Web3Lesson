@@ -6,34 +6,22 @@
 	"output": {
 		"abi": [
 			{
-				"anonymous": false,
 				"inputs": [
 					{
-						"indexed": false,
-						"internalType": "bytes",
-						"name": "data",
-						"type": "bytes"
+						"internalType": "string",
+						"name": "funcName",
+						"type": "string"
 					}
 				],
-				"name": "Log",
-				"type": "event"
-			},
-			{
-				"inputs": [
+				"name": "getSelector",
+				"outputs": [
 					{
-						"internalType": "address",
-						"name": "addr",
-						"type": "address"
-					},
-					{
-						"internalType": "uint256",
-						"name": "amount",
-						"type": "uint256"
+						"internalType": "bytes4",
+						"name": "",
+						"type": "bytes4"
 					}
 				],
-				"name": "transfer",
-				"outputs": [],
-				"stateMutability": "nonpayable",
+				"stateMutability": "pure",
 				"type": "function"
 			}
 		],
@@ -50,7 +38,7 @@
 	},
 	"settings": {
 		"compilationTarget": {
-			"solidity合约交互/合约调用机制.sol": "Receiver"
+			"solidity合约交互/合约调用机制.sol": "FunctionSelector"
 		},
 		"evmVersion": "osaka",
 		"libraries": {},

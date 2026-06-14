@@ -33,42 +33,6 @@
 				],
 				"stateMutability": "nonpayable",
 				"type": "function"
-			},
-			{
-				"inputs": [
-					{
-						"internalType": "address payable",
-						"name": "to",
-						"type": "address"
-					},
-					{
-						"internalType": "uint256",
-						"name": "amount",
-						"type": "uint256"
-					}
-				],
-				"name": "sendEth",
-				"outputs": [],
-				"stateMutability": "nonpayable",
-				"type": "function"
-			},
-			{
-				"inputs": [
-					{
-						"internalType": "address payable",
-						"name": "to",
-						"type": "address"
-					},
-					{
-						"internalType": "uint256",
-						"name": "amount",
-						"type": "uint256"
-					}
-				],
-				"name": "transferEth",
-				"outputs": [],
-				"stateMutability": "nonpayable",
-				"type": "function"
 			}
 		],
 		"devdoc": {
@@ -99,11 +63,11 @@
 	},
 	"sources": {
 		"solidity金融和支付/发送以太币transfer、send、call.sol": {
-			"keccak256": "0x649bf705cb7b71393e721266d9b431a724e0851f9317019d3b87c649feae51b6",
+			"keccak256": "0x240449876a1a15b01afba06c340e57cec9cb6dbe6f2908c4aeb32f4dc25e482d",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://a27dfc80a3a523a607f0a3776789a6f8928da3b946078669dd9373a35b54d2b5",
-				"dweb:/ipfs/QmX9ifH8AVZu92rusQfNweP4ymwdyKJYJ3QyW7rB1zJtj3"
+				"bzz-raw://2113ea9745550dea8295f772b2204bef98f6c7696e3276c26478fac5484e4341",
+				"dweb:/ipfs/QmbZAv3FxanS4VvTVBt4FTG93feSz2i3huJ15kv78A1tL8"
 			]
 		}
 	},

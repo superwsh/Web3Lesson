@@ -39,6 +39,10 @@
 			{
 				"stateMutability": "payable",
 				"type": "fallback"
+			},
+			{
+				"stateMutability": "payable",
+				"type": "receive"
 			}
 		],
 		"devdoc": {
@@ -54,7 +58,7 @@
 	},
 	"settings": {
 		"compilationTarget": {
-			"solidity金融和支付/falback和receive.sol": "Fallback"
+			"solidity金融和支付/接收receive和回退fallback.sol": "Fallback"
 		},
 		"evmVersion": "osaka",
 		"libraries": {},
@@ -68,12 +72,12 @@
 		"remappings": []
 	},
 	"sources": {
-		"solidity金融和支付/falback和receive.sol": {
-			"keccak256": "0xd6ddcc279f4bb924772e39f2b433a1c7847441516213cfbb3e952f4fc3fef07a",
+		"solidity金融和支付/接收receive和回退fallback.sol": {
+			"keccak256": "0x8d565041bdd8ab1bc34884f48850fc0318843a0c9d18f22319c8240a5c2d4839",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://f96c0b9f3e0995c8d45dcfa90411899545f9ec2a64e5e7e4c73bae9925a8fcdd",
-				"dweb:/ipfs/QmQzdFDJVuYyyhMvtcDLTG2no1HaSc2pNN396jEaSvwtTT"
+				"bzz-raw://89aee763d95f574ee35e4d19b2e1bfe33b4dddb6b7e2137dcc8020ccf7c230ad",
+				"dweb:/ipfs/QmcbToT5ffAbNgeuHE5uKqErQRqe3DSVFSuSMHJMwwMq8s"
 			]
 		}
 	},
