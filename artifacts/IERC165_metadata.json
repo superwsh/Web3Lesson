@@ -1,0 +1,65 @@
+{
+	"compiler": {
+		"version": "0.8.34+commit.80d5c536"
+	},
+	"language": "Solidity",
+	"output": {
+		"abi": [
+			{
+				"inputs": [
+					{
+						"internalType": "bytes4",
+						"name": "interfaceId",
+						"type": "bytes4"
+					}
+				],
+				"name": "supportsInterface",
+				"outputs": [
+					{
+						"internalType": "bool",
+						"name": "",
+						"type": "bool"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			}
+		],
+		"devdoc": {
+			"kind": "dev",
+			"methods": {},
+			"version": 1
+		},
+		"userdoc": {
+			"kind": "user",
+			"methods": {},
+			"version": 1
+		}
+	},
+	"settings": {
+		"compilationTarget": {
+			"solidity金融和支付/ERC721.sol": "IERC165"
+		},
+		"evmVersion": "osaka",
+		"libraries": {},
+		"metadata": {
+			"bytecodeHash": "ipfs"
+		},
+		"optimizer": {
+			"enabled": false,
+			"runs": 200
+		},
+		"remappings": []
+	},
+	"sources": {
+		"solidity金融和支付/ERC721.sol": {
+			"keccak256": "0xcbac154d65df8b206bcbdf51c018c9a0a86651f47594193e3edc8bf11943979d",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://3e87dec75440a44dc138f61033d1575c26443476831f7659a03d3b7b12e90dc5",
+				"dweb:/ipfs/QmUWJZyF7gVsCszP9ARvKFT36PVwdAyuzz8ZJrn1sW3gJk"
+			]
+		}
+	},
+	"version": 1
+}

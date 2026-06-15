@@ -1,0 +1,69 @@
+{
+	"compiler": {
+		"version": "0.8.34+commit.80d5c536"
+	},
+	"language": "Solidity",
+	"output": {
+		"abi": [
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "from",
+						"type": "address"
+					},
+					{
+						"internalType": "address",
+						"name": "to",
+						"type": "address"
+					},
+					{
+						"internalType": "uint256",
+						"name": "nftId",
+						"type": "uint256"
+					}
+				],
+				"name": "transferFrom",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			}
+		],
+		"devdoc": {
+			"kind": "dev",
+			"methods": {},
+			"version": 1
+		},
+		"userdoc": {
+			"kind": "user",
+			"methods": {},
+			"version": 1
+		}
+	},
+	"settings": {
+		"compilationTarget": {
+			"solidity金融和支付/英式拍卖EnglishAuction.sol": "IERC721"
+		},
+		"evmVersion": "osaka",
+		"libraries": {},
+		"metadata": {
+			"bytecodeHash": "ipfs"
+		},
+		"optimizer": {
+			"enabled": false,
+			"runs": 200
+		},
+		"remappings": []
+	},
+	"sources": {
+		"solidity金融和支付/英式拍卖EnglishAuction.sol": {
+			"keccak256": "0xbfcc3fc1de90a00b53708e7cc00f28cfaada6c0a71314ca1d6d7d3f7e309c525",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://c1b3aebf2b35991a4b242ef1621546174761e0b6b3833ce26a28863cd11b3f17",
+				"dweb:/ipfs/QmW3o9sHdBnmKfcxUfLkJoqTRqMVEbsMjYneQTAB4qFvZh"
+			]
+		}
+	},
+	"version": 1
+}
