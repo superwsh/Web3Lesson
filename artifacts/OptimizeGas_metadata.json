@@ -1,0 +1,72 @@
+{
+	"compiler": {
+		"version": "0.8.34+commit.80d5c536"
+	},
+	"language": "Solidity",
+	"output": {
+		"abi": [
+			{
+				"inputs": [
+					{
+						"internalType": "uint256[]",
+						"name": "arr",
+						"type": "uint256[]"
+					}
+				],
+				"name": "optimizeGasUsage",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "total",
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			}
+		],
+		"devdoc": {
+			"kind": "dev",
+			"methods": {},
+			"version": 1
+		},
+		"userdoc": {
+			"kind": "user",
+			"methods": {},
+			"version": 1
+		}
+	},
+	"settings": {
+		"compilationTarget": {
+			"solidity高级应用/gas优化.sol": "OptimizeGas"
+		},
+		"evmVersion": "osaka",
+		"libraries": {},
+		"metadata": {
+			"bytecodeHash": "ipfs"
+		},
+		"optimizer": {
+			"enabled": false,
+			"runs": 200
+		},
+		"remappings": []
+	},
+	"sources": {
+		"solidity高级应用/gas优化.sol": {
+			"keccak256": "0xb6739220627688828d3ab4e325f34e28539780fdcec6d4dc04b09c2c8cd0c772",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://4b444ccfb92a9fab8655bb185b149ca1306cbecaff1b8ebcd3410f28cadf01fe",
+				"dweb:/ipfs/QmVCp3P9zFKgYxXNwAxJvnvWu37qawW6FxeQEVAHr74WqW"
+			]
+		}
+	},
+	"version": 1
+}

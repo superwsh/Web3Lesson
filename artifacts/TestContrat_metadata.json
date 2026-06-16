@@ -1,0 +1,72 @@
+{
+	"compiler": {
+		"version": "0.8.34+commit.80d5c536"
+	},
+	"language": "Solidity",
+	"output": {
+		"abi": [
+			{
+				"inputs": [],
+				"name": "getTimestamp",
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "test",
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"stateMutability": "pure",
+				"type": "function"
+			}
+		],
+		"devdoc": {
+			"kind": "dev",
+			"methods": {},
+			"version": 1
+		},
+		"userdoc": {
+			"kind": "user",
+			"methods": {},
+			"version": 1
+		}
+	},
+	"settings": {
+		"compilationTarget": {
+			"solidity高级应用/timelock时间锁.sol": "TestContrat"
+		},
+		"evmVersion": "osaka",
+		"libraries": {},
+		"metadata": {
+			"bytecodeHash": "ipfs"
+		},
+		"optimizer": {
+			"enabled": false,
+			"runs": 200
+		},
+		"remappings": []
+	},
+	"sources": {
+		"solidity高级应用/timelock时间锁.sol": {
+			"keccak256": "0xace66c431017c05f88497f95e3ec84a0538799a8426a8d3ec16b418eb73788ab",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://429ca2d2256962a66d1d81e87d982b3ce3564c490adbd78d6cb3afb4ec08337e",
+				"dweb:/ipfs/QmZurxswAPBzQLJJD9jFWSmhshaFfbunpjQoz4wMXWA2De"
+			]
+		}
+	},
+	"version": 1
+}
