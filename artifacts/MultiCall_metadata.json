@@ -1,0 +1,70 @@
+{
+	"compiler": {
+		"version": "0.8.34+commit.80d5c536"
+	},
+	"language": "Solidity",
+	"output": {
+		"abi": [
+			{
+				"inputs": [
+					{
+						"internalType": "address[]",
+						"name": "addrs",
+						"type": "address[]"
+					},
+					{
+						"internalType": "bytes[]",
+						"name": "funcBytes",
+						"type": "bytes[]"
+					}
+				],
+				"name": "multicall",
+				"outputs": [
+					{
+						"internalType": "bytes[]",
+						"name": "",
+						"type": "bytes[]"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			}
+		],
+		"devdoc": {
+			"kind": "dev",
+			"methods": {},
+			"version": 1
+		},
+		"userdoc": {
+			"kind": "user",
+			"methods": {},
+			"version": 1
+		}
+	},
+	"settings": {
+		"compilationTarget": {
+			"solidity合约交互/合约多次调用.sol": "MultiCall"
+		},
+		"evmVersion": "osaka",
+		"libraries": {},
+		"metadata": {
+			"bytecodeHash": "ipfs"
+		},
+		"optimizer": {
+			"enabled": false,
+			"runs": 200
+		},
+		"remappings": []
+	},
+	"sources": {
+		"solidity合约交互/合约多次调用.sol": {
+			"keccak256": "0x62c8416af1279b52110168b265244376e29b30d95780f14452bcc67e7c8a9a93",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://65dccb956f655ecc813e3673c7f4ae99ac3bfecf53ef5b624bc2388cec0d1e02",
+				"dweb:/ipfs/QmNbAofXUnDrKxM51KcXNjg5mHPxb3gdZuPuJo1qvekdwU"
+			]
+		}
+	},
+	"version": 1
+}
