@@ -10,16 +10,15 @@ pragma solidity ^0.8.23;
 contract TimeLock {
     address public owner;
     mapping(bytes32 => bool) public queued;
-    uint public constant MIN_DELAY = 100;
+    uint public constant MIN_DELAY = 40;
     uint public constant MAX_DELAY = 1000;
-    uint public constant GRACE_PERIOD = 1000;
 
     error AlreadyQueuedError(bytes32 id);
     error NotQueuedError(bytes32 id);
     error TimestampNotInRangeError();
     error AlreadyCancelError(bytes32 id);
-    error TimeNotGreaterThanMinError();
-    error TimeGreaterThanMaxError();
+    error TimeNotPassedError();
+    error TimeExpiredError();
 
     event QueueLog(bytes32 indexed  id,address target, uint amount, string  funcName,bytes data, uint timestamp);
     event Cancel(bytes32 id);
@@ -50,7 +49,7 @@ contract TimeLock {
         if(queued[id]) {
             revert AlreadyQueuedError(id);
         }
-
+        
         if(timestamp < block.timestamp + MIN_DELAY || timestamp > block.timestamp + MAX_DELAY) {
             revert TimestampNotInRangeError();
         }
@@ -78,15 +77,15 @@ contract TimeLock {
         if(!queued[id]) {
             revert NotQueuedError(id);
         }
-
-        if(timestamp < block.timestamp + MIN_DELAY) {
-            revert TimeNotGreaterThanMinError();
+        //在
+        if(block.timestamp < timestamp) {
+            revert TimeNotPassedError();
         }
 
-        if(timestamp > block.timestamp + MAX_DELAY) {
-            revert TimeGreaterThanMaxError();
+        if(block.timestamp > timestamp + MAX_DELAY) {
+            revert TimeExpiredError();
         }
-        queued[id] = true;
+        queued[id] = false;
         bytes memory funcBytes =  abi.encodeWithSignature(funcName);
         // bytes memory funcBytes1 =  abi.encodePacked(bytes4(keccak256(bytes(funcName)))); //上面代码的底层实现
         (bool success,bytes memory result) =  target.call{value: amount}(funcBytes);
@@ -102,7 +101,7 @@ contract TestContrat {
     function test() external pure returns(uint){
        return 1;
     }
-    function getTimestamp() external view returns(uint){
-        return block.timestamp + 100;
+    function getDelayTimestamp(uint delay) external view returns(uint){
+        return block.timestamp + delay;
     }
 }
