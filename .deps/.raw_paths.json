@@ -3,5 +3,20 @@
   "@openzeppelin/contracts@5.6.1/token/ERC20/IERC20.sol": ".deps/npm/@openzeppelin/contracts@5.6.1/token/ERC20/IERC20.sol",
   "@openzeppelin/contracts@5.6.1/token/ERC20/extensions/IERC20Metadata.sol": ".deps/npm/@openzeppelin/contracts@5.6.1/token/ERC20/extensions/IERC20Metadata.sol",
   "@openzeppelin/contracts@5.6.1/utils/Context.sol": ".deps/npm/@openzeppelin/contracts@5.6.1/utils/Context.sol",
-  "@openzeppelin/contracts@5.6.1/interfaces/draft-IERC6093.sol": ".deps/npm/@openzeppelin/contracts@5.6.1/interfaces/draft-IERC6093.sol"
+  "@openzeppelin/contracts@5.6.1/interfaces/draft-IERC6093.sol": ".deps/npm/@openzeppelin/contracts@5.6.1/interfaces/draft-IERC6093.sol",
+  "@openzeppelin/contracts@5.6.1/interfaces/IERC20.sol": ".deps/npm/@openzeppelin/contracts@5.6.1/interfaces/IERC20.sol",
+  "@openzeppelin/contracts@5.6.1/interfaces/TOIERC20.sol": ".deps/npm/@openzeppelin/contracts@5.6.1/interfaces/TOIERC20.sol",
+  "@openzeppelin/contracts@5.6.1/interfaces/TIERC20.sol": ".deps/npm/@openzeppelin/contracts@5.6.1/interfaces/TIERC20.sol",
+  "@openzeppelin/contracts@5.6.1/interfaces/toIERC20.sol": ".deps/npm/@openzeppelin/contracts@5.6.1/interfaces/toIERC20.sol",
+  "@openzeppelin/contracts@5.6.1/interfaces/tokIERC20.sol": ".deps/npm/@openzeppelin/contracts@5.6.1/interfaces/tokIERC20.sol",
+  "@openzeppelin/contracts@5.6.1/interfaces/tokeIERC20.sol": ".deps/npm/@openzeppelin/contracts@5.6.1/interfaces/tokeIERC20.sol",
+  "@openzeppelin/contracts@5.6.1/interfaces/tokenIERC20.sol": ".deps/npm/@openzeppelin/contracts@5.6.1/interfaces/tokenIERC20.sol",
+  "@openzeppelin/contracts@5.6.1/interfaces/token/IERC20.sol": ".deps/npm/@openzeppelin/contracts@5.6.1/interfaces/token/IERC20.sol",
+  "@openzeppelin/contracts@5.6.1/interfaces/token/EIERC20.sol": ".deps/npm/@openzeppelin/contracts@5.6.1/interfaces/token/EIERC20.sol",
+  "@openzeppelin/contracts@5.6.1/interfaces/token/ERIERC20.sol": ".deps/npm/@openzeppelin/contracts@5.6.1/interfaces/token/ERIERC20.sol",
+  "@openzeppelin/contracts@5.6.1/interfaces/token/ERCIERC20.sol": ".deps/npm/@openzeppelin/contracts@5.6.1/interfaces/token/ERCIERC20.sol",
+  "@openzeppelin/contracts@5.6.1/interfaces/token/ERC2IERC20.sol": ".deps/npm/@openzeppelin/contracts@5.6.1/interfaces/token/ERC2IERC20.sol",
+  "@openzeppelin/contracts@5.6.1/interfaces/token/ERC20IERC20.sol": ".deps/npm/@openzeppelin/contracts@5.6.1/interfaces/token/ERC20IERC20.sol",
+  "@openzeppelin/contracts@5.6.1/interfaces/token/ERC20/IERC20.sol": ".deps/npm/@openzeppelin/contracts@5.6.1/interfaces/token/ERC20/IERC20.sol",
+  "@openzeppelin/contracts@5.6.1/interfaces/token/ERC20/ERC20.sol": ".deps/npm/@openzeppelin/contracts@5.6.1/interfaces/token/ERC20/ERC20.sol"
 }
