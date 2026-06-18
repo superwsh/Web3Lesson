@@ -47,7 +47,7 @@ contract StakingRewards {
     //计算赚取金额  上次计算出的赚取金额 + 质押金额 *（当前比例 - 上次的比例） 
    function earn(address account) public view returns(uint) {
         return rewardsOf[account] + 
-        balanceOf[account] * (calCurrentGlobalStakeToReward() - userStakeToRewarOf[account]);
+        balanceOf[account] * (calCurrentGlobalStakeToReward() - userStakeToRewarOf[account]) / 1e18;
    }
 
     //计算当前全局质押币奖励比例
