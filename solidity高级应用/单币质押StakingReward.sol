@@ -11,12 +11,12 @@ contract StakingRewards {
    uint public finshTime;//结束时间
    uint public updateTime;//更新时间
 
-   uint public rewardRate;//奖励速率（每秒给所有用户的奖励币，例如30秒后将30块奖励按一定比例分给若干用户）
+   uint public rewardRate;//奖励速率（每秒给所有用户的奖励币，例如30秒后将30块奖励按一定指数分给若干用户）
    mapping(address => uint)  public balanceOf;//账户的质押金额
    uint public totalSupply;//总质押金额
 
-   uint public globalStakeToRewar; //全局质押币兑奖励币的比例
-   mapping(address => uint) public userStakeToRewarOf;//用户的质押币兑换奖励币的比例
+   uint public globalStakeToRewar; //全局质押币兑奖励币的指数
+   mapping(address => uint) public userStakeToRewarOf;//用户的质押币兑换奖励币的指数
    mapping(address => uint) public rewardsOf; //用户的奖励金额
 
    constructor(address stakeAddr,address rewardAddr,uint _duration) {
@@ -32,8 +32,8 @@ contract StakingRewards {
    }
 
    // 发生新的质押或提取时
-   // 更新全局质押币兑换奖励币的比例（累加）；更新这个用户的已赚取奖励（累加）
-   // 记录此次时间点用户的质押币兑奖励币的比例
+   // 更新全局质押币兑换奖励币的指数（累加）；更新这个用户的已赚取奖励（累加）
+   // 记录此次时间点用户的质押币兑奖励币的指数
    modifier updateStakeToReward(address account) {
         globalStakeToRewar  = calCurrentGlobalStakeToReward();
         updateTime = getLastEffectTime();
@@ -44,15 +44,15 @@ contract StakingRewards {
         _;
    }
 
-    //计算赚取金额  上次计算出的赚取金额 + 质押金额 *（当前比例 - 上次的比例） 
+    // 计算某用户的奖励金额  = 上次计算出的奖励金额 + 这段时间的奖励金额
+    // 这段时间的奖励金额 =  质押金额 *（当前全局奖励指数 - 上次用户的奖励指数） 
    function earn(address account) public view returns(uint) {
         return rewardsOf[account] + 
         balanceOf[account] * (calCurrentGlobalStakeToReward() - userStakeToRewarOf[account]) / 1e18;
    }
 
-    //计算当前全局质押币奖励比例
-    // 旧比例 + 新比例
-    // 新比例 =  = 时间段内总奖励额(奖励速率 * 时间差) / 总质押金额
+    // 计算当前全局奖励指数 = 旧奖励指数 + 这段时间的奖励指数
+    // 这段时间的奖励指数 = 时间段内奖励额(奖励速率 * 时间) / 总质押金额
    function calCurrentGlobalStakeToReward() public view returns(uint) {
         if (totalSupply == 0) return globalStakeToRewar;
         return globalStakeToRewar + (rewardRate * (getLastEffectTime() - updateTime) * 1e18) / totalSupply;
