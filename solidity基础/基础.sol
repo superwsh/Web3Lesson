@@ -25,6 +25,14 @@ contract HelloWrold {
         uint blockNum = block.number;//全局变量：块高
         return (sender, timestamp, blockNum);
     }
+
+    //uncheked可以禁用上溢或下溢监察
+    function unchekFunction(uint x,uint y) external pure returns(uint) {
+        unchecked {
+            x-y;
+            return x + y ;
+        }
+    }
 }
 
 //常量节省gas费

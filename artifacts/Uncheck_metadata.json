@@ -1,0 +1,70 @@
+{
+	"compiler": {
+		"version": "0.8.34+commit.80d5c536"
+	},
+	"language": "Solidity",
+	"output": {
+		"abi": [
+			{
+				"inputs": [
+					{
+						"internalType": "uint256",
+						"name": "x",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint256",
+						"name": "y",
+						"type": "uint256"
+					}
+				],
+				"name": "subtract",
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"stateMutability": "pure",
+				"type": "function"
+			}
+		],
+		"devdoc": {
+			"kind": "dev",
+			"methods": {},
+			"version": 1
+		},
+		"userdoc": {
+			"kind": "user",
+			"methods": {},
+			"version": 1
+		}
+	},
+	"settings": {
+		"compilationTarget": {
+			"solidity高级应用/Uncheck.sol": "Uncheck"
+		},
+		"evmVersion": "osaka",
+		"libraries": {},
+		"metadata": {
+			"bytecodeHash": "ipfs"
+		},
+		"optimizer": {
+			"enabled": false,
+			"runs": 200
+		},
+		"remappings": []
+	},
+	"sources": {
+		"solidity高级应用/Uncheck.sol": {
+			"keccak256": "0xa081e4b49e92fd65d41911cbbff5c9f2ef53927020e64ab9a35bf280c712d6ba",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://ef2654a82ad5ff5edb21f6454226e0bab3803873270a8466b35019d703ad58eb",
+				"dweb:/ipfs/QmbTLzLMynRGBxBFQSupt2vgKA3kxGozw4kHLBibTF1jiL"
+			]
+		}
+	},
+	"version": 1
+}
