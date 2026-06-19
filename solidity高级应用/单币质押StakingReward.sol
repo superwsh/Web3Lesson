@@ -11,7 +11,7 @@ contract StakingRewards {
    uint public finshTime;//结束时间
    uint public updateTime;//更新时间
 
-   uint public rewardRate;//奖励速率（每秒）
+   uint public rewardRate;//奖励速率（每秒给所有用户的奖励币，例如30秒后将30块奖励按一定比例分给若干用户）
    mapping(address => uint)  public balanceOf;//账户的质押金额
    uint public totalSupply;//总质押金额
 
