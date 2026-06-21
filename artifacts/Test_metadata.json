@@ -1,0 +1,70 @@
+{
+	"compiler": {
+		"version": "0.8.34+commit.80d5c536"
+	},
+	"language": "Solidity",
+	"output": {
+		"abi": [
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "_addr",
+						"type": "address"
+					}
+				],
+				"stateMutability": "nonpayable",
+				"type": "constructor"
+			},
+			{
+				"inputs": [],
+				"name": "addr",
+				"outputs": [
+					{
+						"internalType": "contract IContract",
+						"name": "",
+						"type": "address"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			}
+		],
+		"devdoc": {
+			"kind": "dev",
+			"methods": {},
+			"version": 1
+		},
+		"userdoc": {
+			"kind": "user",
+			"methods": {},
+			"version": 1
+		}
+	},
+	"settings": {
+		"compilationTarget": {
+			"solidity合约交互/创建合约-字节码方式.sol": "Test"
+		},
+		"evmVersion": "osaka",
+		"libraries": {},
+		"metadata": {
+			"bytecodeHash": "ipfs"
+		},
+		"optimizer": {
+			"enabled": false,
+			"runs": 200
+		},
+		"remappings": []
+	},
+	"sources": {
+		"solidity合约交互/创建合约-字节码方式.sol": {
+			"keccak256": "0x28d431d1e086f48fdf0820bdd2e5923532f6ce6f09d3f4045af78fb73ae0cfc0",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://f15b8539df113b34fca3723c271c48a89acfe38a151ebe6f16d38443f6888cbe",
+				"dweb:/ipfs/QmePmUkg1YQRHiD4nPqSR7kXsU8MSiipg1FZH4Ji9xSLmb"
+			]
+		}
+	},
+	"version": 1
+}

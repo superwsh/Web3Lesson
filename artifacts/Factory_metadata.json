@@ -1,0 +1,66 @@
+{
+	"compiler": {
+		"version": "0.8.34+commit.80d5c536"
+	},
+	"language": "Solidity",
+	"output": {
+		"abi": [
+			{
+				"anonymous": false,
+				"inputs": [
+					{
+						"indexed": false,
+						"internalType": "address",
+						"name": "addr",
+						"type": "address"
+					}
+				],
+				"name": "Log",
+				"type": "event"
+			},
+			{
+				"inputs": [],
+				"name": "deploy",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			}
+		],
+		"devdoc": {
+			"kind": "dev",
+			"methods": {},
+			"version": 1
+		},
+		"userdoc": {
+			"kind": "user",
+			"methods": {},
+			"version": 1
+		}
+	},
+	"settings": {
+		"compilationTarget": {
+			"solidity合约交互/创建合约-字节码方式.sol": "Factory"
+		},
+		"evmVersion": "osaka",
+		"libraries": {},
+		"metadata": {
+			"bytecodeHash": "ipfs"
+		},
+		"optimizer": {
+			"enabled": false,
+			"runs": 200
+		},
+		"remappings": []
+	},
+	"sources": {
+		"solidity合约交互/创建合约-字节码方式.sol": {
+			"keccak256": "0xb7e3f2ee6c0d3da777cd1737aef307f46041c60fe61feaf004384d31bed589df",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://ae05d0dd7ff0b44e2c2528e8f83431003fe6dc929bf1b66bf825937be8d49bbe",
+				"dweb:/ipfs/QmVKhS14z4wbSjjXntVSqLZUTXkrRZv4hzhRsGCWr2GL65"
+			]
+		}
+	},
+	"version": 1
+}
