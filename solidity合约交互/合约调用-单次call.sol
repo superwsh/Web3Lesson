@@ -39,4 +39,13 @@ contract Caller {
         (bool success,) = testAddr.call(abi.encodeWithSignature("noExist()"));
         require(success, "Call Failed");
     }
+
+    //encodeCall严格检查，确保函数名和参数正确。
+    function encodeCall(address to, uint256 amount) public pure returns (bytes memory) {
+        return abi.encodeCall(IERC20.transfer, (to,amount));
+    }
+}
+
+interface IERC20 {
+    function transfer(address to, uint256 amount) external pure returns (bool);
 }

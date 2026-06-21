@@ -10,44 +10,78 @@
 				"inputs": [
 					{
 						"indexed": false,
-						"internalType": "bytes",
-						"name": "res",
-						"type": "bytes"
+						"internalType": "address",
+						"name": "sender",
+						"type": "address"
+					},
+					{
+						"indexed": false,
+						"internalType": "string",
+						"name": "message",
+						"type": "string"
 					}
 				],
 				"name": "Log",
 				"type": "event"
 			},
 			{
-				"inputs": [],
-				"name": "getFuncBytes",
-				"outputs": [
+				"inputs": [
 					{
-						"internalType": "bytes",
-						"name": "",
-						"type": "bytes"
+						"internalType": "string",
+						"name": "_msg",
+						"type": "string"
+					},
+					{
+						"internalType": "uint256",
+						"name": "num",
+						"type": "uint256"
 					}
 				],
-				"stateMutability": "pure",
+				"name": "foo",
+				"outputs": [
+					{
+						"internalType": "bool",
+						"name": "",
+						"type": "bool"
+					},
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"stateMutability": "payable",
 				"type": "function"
 			},
 			{
-				"inputs": [
+				"inputs": [],
+				"name": "message",
+				"outputs": [
 					{
-						"internalType": "address",
-						"name": "_fallback",
-						"type": "address"
-					},
-					{
-						"internalType": "bytes",
-						"name": "funcBytes",
-						"type": "bytes"
+						"internalType": "string",
+						"name": "",
+						"type": "string"
 					}
 				],
-				"name": "test",
-				"outputs": [],
-				"stateMutability": "nonpayable",
+				"stateMutability": "view",
 				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "number",
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"stateMutability": "payable",
+				"type": "receive"
 			}
 		],
 		"devdoc": {
@@ -63,7 +97,7 @@
 	},
 	"settings": {
 		"compilationTarget": {
-			"solidity金融和支付/接收receive和回退fallback.sol": "TestContract"
+			"solidity合约交互/合约调用-单次call.sol": "TestContract"
 		},
 		"evmVersion": "osaka",
 		"libraries": {},
@@ -77,12 +111,12 @@
 		"remappings": []
 	},
 	"sources": {
-		"solidity金融和支付/接收receive和回退fallback.sol": {
-			"keccak256": "0x36a219d2253960248611caf84abbbea0d75128b7fa28c9fa93f9f3cab081a1f5",
+		"solidity合约交互/合约调用-单次call.sol": {
+			"keccak256": "0xb0b4d234939bbd4dc57962e348f1101fe296b566371822df7229ee67146a821b",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://7352b5badead6d6f93b7f033bfa59b630554309fa50ad485f47c816200fb18c1",
-				"dweb:/ipfs/QmbXYAEXZSmLFXHxJghm74261Cn3dnqX2i57Va1H9hT9qE"
+				"bzz-raw://59946a59348ad933e85405c13cee7346e82b024f5a1952af2edf256c16243712",
+				"dweb:/ipfs/QmRbLx8T48VzQveKshWHa7VKGn1VNNTAf8ikwsEeGgvJfo"
 			]
 		}
 	},

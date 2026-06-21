@@ -9,55 +9,6 @@
 				"inputs": [
 					{
 						"internalType": "address",
-						"name": "testAddr",
-						"type": "address"
-					},
-					{
-						"internalType": "string",
-						"name": "message",
-						"type": "string"
-					},
-					{
-						"internalType": "uint256",
-						"name": "num",
-						"type": "uint256"
-					}
-				],
-				"name": "callFoo",
-				"outputs": [],
-				"stateMutability": "payable",
-				"type": "function"
-			},
-			{
-				"inputs": [
-					{
-						"internalType": "address",
-						"name": "testAddr",
-						"type": "address"
-					}
-				],
-				"name": "callNonExistentFunction",
-				"outputs": [],
-				"stateMutability": "nonpayable",
-				"type": "function"
-			},
-			{
-				"inputs": [],
-				"name": "data",
-				"outputs": [
-					{
-						"internalType": "bytes",
-						"name": "",
-						"type": "bytes"
-					}
-				],
-				"stateMutability": "view",
-				"type": "function"
-			},
-			{
-				"inputs": [
-					{
-						"internalType": "address",
 						"name": "to",
 						"type": "address"
 					},
@@ -67,12 +18,12 @@
 						"type": "uint256"
 					}
 				],
-				"name": "encodeCall",
+				"name": "transfer",
 				"outputs": [
 					{
-						"internalType": "bytes",
+						"internalType": "bool",
 						"name": "",
-						"type": "bytes"
+						"type": "bool"
 					}
 				],
 				"stateMutability": "pure",
@@ -92,7 +43,7 @@
 	},
 	"settings": {
 		"compilationTarget": {
-			"solidity合约交互/合约调用-单次call.sol": "Caller"
+			"solidity合约交互/合约调用-单次call.sol": "IERC20"
 		},
 		"evmVersion": "osaka",
 		"libraries": {},
