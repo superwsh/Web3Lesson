@@ -23,6 +23,25 @@
 				],
 				"stateMutability": "pure",
 				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "uint256",
+						"name": "x",
+						"type": "uint256"
+					}
+				],
+				"name": "findMostSignificantBitAssembly",
+				"outputs": [
+					{
+						"internalType": "uint8",
+						"name": "r",
+						"type": "uint8"
+					}
+				],
+				"stateMutability": "pure",
+				"type": "function"
 			}
 		],
 		"devdoc": {
@@ -53,11 +72,11 @@
 	},
 	"sources": {
 		"solidity高级应用/二分查找最高有效位.sol": {
-			"keccak256": "0xb0f5be64ae71e58061e9534e3f261c074fe10d73157fabcafa5624162168c828",
+			"keccak256": "0x56f92e2c6c366838effc77cd92abeb7e21a399eef09fdb99be696bd7381b63af",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://0d5f1f05e5b23b735eb5851c18577b77bc4e5f5047c3b6fc1447cb026e23db24",
-				"dweb:/ipfs/QmbvDfARhgnLhQSf5PnnYMeqwAMkuGWYo1oF3bPsGhb9Af"
+				"bzz-raw://917dc42d7e43976e4f4e470c71a80b8cebb4cfcda545e0ecfce30f9f60f5a926",
+				"dweb:/ipfs/QmUG5WpHfj11DQPdz7wokKz2tah5ayQmJMLVJ4mNtwA6QP"
 			]
 		}
 	},

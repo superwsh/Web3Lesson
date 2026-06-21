@@ -47,4 +47,62 @@ contract MostSignificantBit {
             r += 1;
         }
     }
+
+    //汇编语言，可以节省gas
+    function findMostSignificantBitAssembly(uint256 x) public pure returns (uint8 r) {
+        assembly {
+            let f := shl(7, gt(x,0xFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF)) 
+            x := shr(f, x)
+            r := or(r, f)
+        }
+
+        assembly {
+            let f := shl(6, gt(x,0xFFFFFFFFFFFFFFFF)) 
+             x := shr(f, x)
+            r := or(r, f)
+        }
+
+        assembly {
+            let f := shl(5, gt(x,0xFFFFFFFF)) 
+             x := shr(f, x)
+            r := or(r, f)
+        }
+
+        assembly {
+            let f := shl(4, gt(x,0xFFFF)) 
+             x := shr(f, x)
+            r := or(r, f)
+        }
+        
+        assembly {
+            let f := shl(3, gt(x,0xFF)) // 如果x>255，返回1左移3位，f=8;如果x<255，返回0左移2位，f=0
+             x := shr(f, x)
+            r := or(r, f)
+        }
+
+        assembly {
+            let f := shl(2, gt(x,0xF)) // 如果x>15，返回1左移2位，f=4;如果x<15，返回0左移2位，f=0
+             x := shr(f, x)
+            r := or(r, f)
+        }
+        
+        assembly {
+            let f := shl(1, gt(x,0x3)) // 如果x>3，返回1左移1位，f=2;如果x<3，返回0左移1位，f=0
+            x := shr(f, x)
+            r := or(r, f)
+        }
+        // 【为什么可以使用or代替累加】
+        // 8：1000
+        // 4：0100
+        // 或运算得1100 = 8+4
+        // 2：0010
+        // 或运算得1110 = 8+4+2
+        // 1：0001
+        // 或运算得1111 = 8+4+2+1
+        // 而如果是0参与或运算，对原结果不会产生任何影响
+        assembly {
+            let f := gt(x, 0x1)
+            r := or(r, f)
+        }
+    }
 }
