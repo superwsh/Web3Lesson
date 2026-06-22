@@ -6,59 +6,53 @@
 	"output": {
 		"abi": [
 			{
-				"inputs": [],
-				"name": "getBytecode1",
-				"outputs": [
+				"anonymous": false,
+				"inputs": [
 					{
-						"internalType": "bytes",
-						"name": "",
-						"type": "bytes"
+						"indexed": false,
+						"internalType": "address",
+						"name": "addr",
+						"type": "address"
 					}
 				],
-				"stateMutability": "pure",
-				"type": "function"
+				"name": "Deploy",
+				"type": "event"
 			},
 			{
 				"inputs": [
 					{
-						"internalType": "uint256",
-						"name": "x",
-						"type": "uint256"
-					},
-					{
-						"internalType": "uint256",
-						"name": "y",
-						"type": "uint256"
-					}
-				],
-				"name": "getBytecode2",
-				"outputs": [
-					{
 						"internalType": "bytes",
-						"name": "",
+						"name": "bytecode",
 						"type": "bytes"
 					}
 				],
-				"stateMutability": "pure",
+				"name": "deploy",
+				"outputs": [
+					{
+						"internalType": "address",
+						"name": "addr",
+						"type": "address"
+					}
+				],
+				"stateMutability": "payable",
 				"type": "function"
 			},
 			{
 				"inputs": [
 					{
 						"internalType": "address",
-						"name": "_owner",
+						"name": "target",
 						"type": "address"
-					}
-				],
-				"name": "getCallData",
-				"outputs": [
+					},
 					{
 						"internalType": "bytes",
-						"name": "",
+						"name": "data",
 						"type": "bytes"
 					}
 				],
-				"stateMutability": "pure",
+				"name": "execute",
+				"outputs": [],
+				"stateMutability": "payable",
 				"type": "function"
 			}
 		],
@@ -75,7 +69,7 @@
 	},
 	"settings": {
 		"compilationTarget": {
-			"solidity高级应用/通过字节码部署任意合约.sol": "Helper"
+			"solidity高级应用/通过字节码部署任意合约.sol": "Proxy"
 		},
 		"evmVersion": "osaka",
 		"libraries": {},

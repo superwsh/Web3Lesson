@@ -7,39 +7,15 @@
 		"abi": [
 			{
 				"inputs": [],
-				"name": "getBytecode1",
+				"name": "owner",
 				"outputs": [
 					{
-						"internalType": "bytes",
+						"internalType": "address",
 						"name": "",
-						"type": "bytes"
+						"type": "address"
 					}
 				],
-				"stateMutability": "pure",
-				"type": "function"
-			},
-			{
-				"inputs": [
-					{
-						"internalType": "uint256",
-						"name": "x",
-						"type": "uint256"
-					},
-					{
-						"internalType": "uint256",
-						"name": "y",
-						"type": "uint256"
-					}
-				],
-				"name": "getBytecode2",
-				"outputs": [
-					{
-						"internalType": "bytes",
-						"name": "",
-						"type": "bytes"
-					}
-				],
-				"stateMutability": "pure",
+				"stateMutability": "view",
 				"type": "function"
 			},
 			{
@@ -50,15 +26,9 @@
 						"type": "address"
 					}
 				],
-				"name": "getCallData",
-				"outputs": [
-					{
-						"internalType": "bytes",
-						"name": "",
-						"type": "bytes"
-					}
-				],
-				"stateMutability": "pure",
+				"name": "setOwner",
+				"outputs": [],
+				"stateMutability": "nonpayable",
 				"type": "function"
 			}
 		],
@@ -75,7 +45,7 @@
 	},
 	"settings": {
 		"compilationTarget": {
-			"solidity高级应用/通过字节码部署任意合约.sol": "Helper"
+			"solidity高级应用/通过字节码部署任意合约.sol": "Contract1"
 		},
 		"evmVersion": "osaka",
 		"libraries": {},
