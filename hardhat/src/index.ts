@@ -45,10 +45,9 @@ async function callContract() {
     const btn = document.createElement("button");
     btn.innerHTML = "inc";
     btn.onclick = async function () {
-        await contract.inc();
-        // const count = await getCount();
-        // const tx = await contract.inc();//提交transaction
-        // await tx.wait();//等待transaction提交完成
+        const tx = await contract.inc();
+        await tx.wait(); //等待transaction提交完成
+        // 事件监听器会自动更新UI，这里不需要再次调用getCount
     }
     //监听合约的事件，更新count
     contract.on(contract.filters.CounterInc(), async function ({ args }) {
