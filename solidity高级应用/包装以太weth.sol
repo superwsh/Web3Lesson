@@ -1,6 +1,8 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.23;
 
+import "@openzeppelin/contracts/token/ERC20/ERC20.sol" ;
+
 // WETH概念: WETH代表"包装的以太"，是一种将以太（ETH）包装为ERC20标准代币的方法。
 // 用户存入ETH时，将铸造出对应的ERC20代币；用户提取时，相应的ERC20代币将被销毁。
 // 合约简化: 使用WETH可以避免编写两个分离的合约（一个针对ETH，一个针对ERC20代币）。通过交互WETH，任何支持ERC20的合约都可以间接支持ETH。
