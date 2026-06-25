@@ -18,7 +18,8 @@ contract SignatureVerify {
 
     // 3. getEthSignedMessageHash 函数，用于生成Ethereum签名消息哈希。
     function getEthSignedMessageHash(bytes32 messageHash) public pure returns(bytes32) {
-        return keccak256(abi.encodePacked("\x19Ethereum Signed Message:\n32", messageHash));//二次加工，这个签名表名它不是一个交易签名
+        //拼接以太坊签名固定字符串，防止签名被滥用。然后根据地址相关的私钥再次签名
+        return keccak256(abi.encodePacked("\x19Ethereum Signed Message:\n32", messageHash));
     }
 
     // 4. recover 函数，用于恢复签名者地址。
