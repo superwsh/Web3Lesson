@@ -26,7 +26,7 @@ interface IERC20 {
     );
 }
 
-contract ERC20Example is IERC20 {
+contract USDTExample is IERC20 {
     uint public override totalSupply;
     mapping(address => uint256) public override balanceOf;
     mapping(address => mapping(address => uint)) public override allowance;
@@ -41,6 +41,7 @@ contract ERC20Example is IERC20 {
         uint256 amount
     ) external override returns (bool) {
         balanceOf[msg.sender] -= amount;
+        balanceOf[recipient] += amount;
         emit Transfer(msg.sender, recipient, amount);
         return true;
     }
@@ -59,7 +60,7 @@ contract ERC20Example is IERC20 {
         address recipient,
         uint256 amount
     ) external override returns (bool) {
-        balanceOf[msg.sender] -= amount;
+        balanceOf[sender] -= amount;
         balanceOf[recipient] += amount;
         allowance[sender][msg.sender] -= amount;
         emit Transfer(sender, recipient, amount);

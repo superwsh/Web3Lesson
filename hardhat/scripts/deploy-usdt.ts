@@ -3,7 +3,7 @@ import "@nomicfoundation/hardhat-ethers";
 import { ethers } from "hardhat";
 
 async function deploy() {
-  const contarct = await ethers.getContractFactory("ERC20Example"); //获取合约字节码
+  const contarct = await ethers.getContractFactory("USDTExample"); //获取合约字节码
   const example = await contarct.deploy(); //部署合约
   await example.waitForDeployment(); //等待合约部署完成
   return example;
